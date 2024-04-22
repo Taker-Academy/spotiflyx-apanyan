@@ -34,7 +34,7 @@ export default function Example() {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div
-                  class="cursor-pointer hover:text-slate-300 transition-all duration-200 text-white text-2xl font-bold flex justify-between items-center"
+                  className="cursor-pointer hover:text-slate-300 transition-all duration-200 text-white text-2xl font-bold flex justify-between items-center"
                 >
                   <a href="/"><h2>Spotiflyx</h2></a>
                 </div>

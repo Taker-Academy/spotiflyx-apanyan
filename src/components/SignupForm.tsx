@@ -44,7 +44,7 @@ export function SignupForm() {
           <Input
             id="confirmpassword"
             placeholder="••••••••"
-            type="confirmpassword"
+            type="password"
           />
         </LabelInputContainer>
 

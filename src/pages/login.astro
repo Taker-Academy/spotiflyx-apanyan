@@ -1,0 +1,15 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { LoginForm } from "../components/LoginForm.tsx";
+---
+
+<Layout title="Welcome to Astro.">
+    <div
+        class="absolute cursor-pointer hover:text-slate-300 transition-all duration-200 text-white text-2xl font-bold flex justify-between items-center mx-16 mt-8"
+    >
+        <a href="/"><h2>Spotiflyx</h2></a>
+    </div>
+    <div class="h-dvh flex justify-center items-center">
+        <LoginForm client:load />
+    </div>
+</Layout>

@@ -44,7 +44,7 @@ export function LoginForm() {
             Don't have an account yet ?
             <a href="/signup">
               <span
-                className="text-white group cursor-pointer relative inline-block ml-1"
+                className="text-pink-500 group cursor-pointer relative inline-block ml-1"
               >Sign up.<span
                 className="block w-0 h-0.5 bg-current transition-width duration-200 group-hover:w-full absolute bottom-0"
               ></span>

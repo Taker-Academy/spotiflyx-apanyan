@@ -1,21 +1,15 @@
-To start frontend server
+## Starting the Frontend Server
 
-Install node if you don't have it installed already
+You can start the frontend server by building and running the Docker image. Here are the steps:
 
-sudo dnf install nodejs
+1. Build the Docker image:
 
-Install npm if you don't have it installed already
+```bash
+docker build -t spotiflyx-frontend .
+```
 
-sudo dnf install npm
+2. Run the Docker image:
 
-Install pnpm if you don't have it installed already
-
-sudo npm install -g pnpm
-
-Install dependencies
-
-pnpm install
-
-Start the server
-
-pnpm start
+```bash
+docker run -p 4321:4321 spotiflyx-frontend
+```

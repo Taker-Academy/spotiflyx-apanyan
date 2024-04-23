@@ -3,7 +3,6 @@ import React from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/utils/cn";
-import { IconBrandWindows } from "@tabler/icons-react";
 
 export function SignupForm() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -17,7 +16,7 @@ export function SignupForm() {
         Welcome to Spotiflyx
       </h2>
       <p className="text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300">
-        Login to Spotiflyx to start listening to your favorite music.
+        Sign up to Spotiflyx to start listening to your favorite music.
       </p>
 
       <form className="mt-8" onSubmit={handleSubmit}>

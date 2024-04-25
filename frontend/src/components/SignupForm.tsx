@@ -33,6 +33,8 @@ export function SignupForm() {
 
     // Vérifier la réponse
     if (response.ok) {
+      const data = await response.json();
+      localStorage.setItem('token', data.token);
       console.log("Form submitted");
       window.location.href = "/browse";
     } else {

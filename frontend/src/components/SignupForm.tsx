@@ -5,11 +5,41 @@ import { Input } from "@/components/ui/input";
 import { cn } from "@/utils/cn";
 
 export function SignupForm() {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Form submitted");
-    window.location.href = "/browse";
+
+    // Récupérer les valeurs des champs du formulaire
+    const firstName = (document.getElementById('firstname') as HTMLInputElement).value;
+    const lastName = (document.getElementById('lastname') as HTMLInputElement).value;
+    const email = (document.getElementById('email') as HTMLInputElement).value;
+    const password = (document.getElementById('password') as HTMLInputElement).value;
+
+    // Créer l'objet utilisateur
+    const user = {
+      firstName,
+      lastName,
+      email,
+      password
+    };
+
+    // Envoyer la requête POST au backend
+    const response = await fetch('http://127.0.0.1:8080/auth/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    });
+
+    // Vérifier la réponse
+    if (response.ok) {
+      console.log("Form submitted");
+      window.location.href = "/browse";
+    } else {
+      console.error('Erreur lors de l\'inscription');
+    }
   };
+
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input md:bg-white md:dark:bg-black">
       <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">

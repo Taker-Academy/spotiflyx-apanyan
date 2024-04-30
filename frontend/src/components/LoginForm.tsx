@@ -1,14 +1,14 @@
 "use client";
 import React from "react";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/aceternity/label";
+import { Input } from "@/components/ui/aceternity/input";
 import { cn } from "@/utils/cn";
 
 export function LoginForm() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Form submitted");
-    window.location.href = "/browse";
+    window.location.href = "/dashboard";
   };
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input md:bg-white md:dark:bg-black">

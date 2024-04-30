@@ -1,0 +1,9 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { Dashboard as Browse } from "@/components/dashboard";
+import "@/styles/globals.css";
+---
+
+<Layout title="Dashboard">
+	<Browse client:load />
+</Layout>

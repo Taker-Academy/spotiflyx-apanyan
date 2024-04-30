@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/aceternity/label";
+import { Input } from "@/components/ui/aceternity/input";
 import { cn } from "@/utils/cn";
 
 export function SignupForm() {
@@ -36,7 +36,7 @@ export function SignupForm() {
       const data = await response.json();
       localStorage.setItem('token', data.token);
       console.log("Form submitted");
-      window.location.href = "/browse";
+      window.location.href = "/dashboard";
     } else {
       console.error('Erreur lors de l\'inscription');
     }

@@ -1,7 +1,9 @@
 ---
-import Layout from "@/layouts/Layout.astro"
+import Layout from "@/layouts/Layout.astro";
+import { Dashboard as SettingsDashboard } from "@/components/settings"
+import "@/styles/globals.css";
 ---
 
 <Layout title="Settings">
-    <h1 class="text-white">Here are the settings</h1>
+    <SettingsDashboard client:load />
 </Layout>

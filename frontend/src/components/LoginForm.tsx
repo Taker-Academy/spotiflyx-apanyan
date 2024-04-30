@@ -1,32 +1,58 @@
-"use client";
 import React from "react";
 import { Label } from "@/components/ui/aceternity/label";
 import { Input } from "@/components/ui/aceternity/input";
 import { cn } from "@/utils/cn";
 
 export function LoginForm() {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Form submitted");
-    window.location.href = "/dashboard";
+
+    // Create the user object
+    const user = {
+      email,
+      password
+    };
+
+    // Send the POST request to the backend
+    const response = await fetch('http://127.0.0.1:8080/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    });
+
+    // Check the response
+    if (response.ok) {
+      const data = await response.json();
+      localStorage.setItem('token', data.token);
+      console.log("Form submitted");
+      window.location.href = "/dashboard";
+    } else {
+      console.error('Error during login');
+    }
   };
+
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input md:bg-white md:dark:bg-black">
       <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
-        Welcome back !
+        Welcome to Spotiflyx
       </h2>
       <p className="text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300">
-        Login to Spotiflyx to start listening to your favorite music.
+        Log in to Spotiflyx to start listening to your favorite music.
       </p>
 
       <form className="mt-8" onSubmit={handleSubmit}>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="email">Email Address</Label>
-          <Input id="email" placeholder="projectmayhem@fc.com" type="email" />
+          <Input id="email" placeholder="projectmayhem@fc.com" type="email" value={email} onChange={e => setEmail(e.target.value)} />
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="password">Password</Label>
-          <Input id="password" placeholder="••••••••" type="password" />
+          <Input id="password" placeholder="••••••••" type="password" value={password} onChange={e => setPassword(e.target.value)} />
         </LabelInputContainer>
 
         <button
@@ -41,7 +67,7 @@ export function LoginForm() {
 
         <div className="flex justify-center">
           <p className="text-white">
-            Don't have an account yet ?
+            Don't have an account ?
             <a href="/signup">
               <span
                 className="text-pink-500 group cursor-pointer relative inline-block ml-1"
@@ -52,8 +78,6 @@ export function LoginForm() {
             </a>
           </p>
         </div>
-
-
       </form>
     </div>
   );

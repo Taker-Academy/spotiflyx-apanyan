@@ -1,9 +1,8 @@
 "use client";
 import React from "react";
-import Link from "next/link";
 import { Label } from "@/components/ui/aceternity/label";
 import { Input } from "@/components/ui/aceternity/input";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/cn";
 
 export function SignupForm() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -36,6 +35,7 @@ export function SignupForm() {
     if (response.ok) {
       const data = await response.json();
       localStorage.setItem('token', data.data.token);
+      console.log("Form submitted");
       window.location.href = "/dashboard";
     } else {
       console.error('Erreur lors de l\'inscription');
@@ -92,14 +92,14 @@ export function SignupForm() {
         <div className="flex justify-center">
           <p className="text-white">
             Already have an account ?
-            <Link href="/login">
+            <a href="/login">
               <span
                 className="text-pink-500 group cursor-pointer relative inline-block ml-1"
               >Log in.<span
                 className="block w-0 h-0.5 bg-current transition-width duration-200 group-hover:w-full absolute bottom-0"
               ></span>
               </span>
-            </Link>
+            </a>
           </p>
         </div>
 

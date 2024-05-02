@@ -1,7 +1,9 @@
+"use client"
 import React from "react";
+import Link from "next/link";
 import { Label } from "@/components/ui/aceternity/label";
 import { Input } from "@/components/ui/aceternity/input";
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/utils";
 
 export function LoginForm() {
   const [email, setEmail] = React.useState("");
@@ -68,14 +70,14 @@ export function LoginForm() {
         <div className="flex justify-center">
           <p className="text-white">
             Don't have an account ?
-            <a href="/signup">
+            <Link href="/signup">
               <span
                 className="text-pink-500 group cursor-pointer relative inline-block ml-1"
               >Sign up.<span
                 className="block w-0 h-0.5 bg-current transition-width duration-200 group-hover:w-full absolute bottom-0"
               ></span>
               </span>
-            </a>
+            </Link>
           </p>
         </div>
       </form>

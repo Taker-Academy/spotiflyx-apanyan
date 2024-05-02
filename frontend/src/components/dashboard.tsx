@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react"
+
 import {
   Home,
   LineChart,
@@ -22,6 +24,28 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { SideNavbar } from "./SideNavbar"
 
 export function Dashboard() {
+  const [userFirstName, setUserFirstName] = useState('');
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const token = localStorage.getItem('token'); // get the token from local storage
+      const response = await fetch('http://127.0.0.1:8080/user/me', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data.data.FirstName);
+        setUserFirstName(data.data.FirstName);
+      } else {
+        console.error('Failed to fetch user data');
+      }
+    };
+
+    fetchUserData();
+  }, []);
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <SideNavbar />
@@ -115,7 +139,7 @@ export function Dashboard() {
             </DropdownMenuContent>
           </DropdownMenu>
         </header>
-        <h1 className="text-5xl ml-8">Your recommendations</h1>
+        <h1 className="text-5xl ml-8">Welcome back, {userFirstName}!</h1>
       </div>
     </div>
   )

@@ -34,7 +34,7 @@ export function SignupForm() {
     // Vérifier la réponse
     if (response.ok) {
       const data = await response.json();
-      localStorage.setItem('token', data.token);
+      localStorage.setItem('token', data.data.token);
       console.log("Form submitted");
       window.location.href = "/dashboard";
     } else {

@@ -7,7 +7,7 @@ import (
 	"api/middleware"
 )
 
-func RemoveUserHandler(c *fiber.Ctx) error {
+func RemoveHandler(c *fiber.Ctx) error {
 	claims := c.Locals("user").(*middleware.CustomClaims)
 	userID := claims.UserID
 	user, err := database.GetUserByID(userID)

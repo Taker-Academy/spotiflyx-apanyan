@@ -16,6 +16,7 @@ func setupRoutes(app *fiber.App) {
     app.Post("/auth/login", routes.LoginHandler)
     app.Get("/user/me", middleware.Authenticate, routes.InfoHandler)
 	app.Put("/user/edit", middleware.Authenticate, routes.EditHandler)
+    app.Delete("/user/remove", middleware.Authenticate, routes.RemoveHandler)
 }
 
 func main() {

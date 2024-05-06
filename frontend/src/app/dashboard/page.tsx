@@ -1,6 +1,8 @@
 "use client"
 import { useEffect, useState } from "react"
 import Link from "next/link"
+import { useCheckAuth } from "@/app/auth/useCheckAuth"
+import logout from "@/app/auth/logout"
 
 import {
   Home,
@@ -30,11 +32,14 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
 export default function Dashboard() {
+  const token = localStorage.getItem('token'); // get the token from local storage
+  useCheckAuth(token); // call checkAuth after the token has been retrieved
   const [userFirstName, setUserFirstName] = useState('');
 
   useEffect(() => {
     const fetchUserData = async () => {
       const token = localStorage.getItem('token'); // get the token from local storage
+
       const response = await fetch('http://127.0.0.1:8080/user/me', {
         headers: {
           'Authorization': `Bearer ${token}`
@@ -51,6 +56,7 @@ export default function Dashboard() {
 
     fetchUserData();
   }, []);
+
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
@@ -227,7 +233,7 @@ export default function Dashboard() {
               <Link href="/settings"><DropdownMenuItem>Settings</DropdownMenuItem></Link>
               <DropdownMenuItem>Support</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <Link href="/"><DropdownMenuItem>Logout</DropdownMenuItem></Link>
+              <Link href="/"><DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem></Link>
             </DropdownMenuContent>
           </DropdownMenu>
         </header>

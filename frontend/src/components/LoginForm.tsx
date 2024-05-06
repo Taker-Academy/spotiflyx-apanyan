@@ -1,5 +1,6 @@
 "use client"
 import React from "react";
+import toast, { Toaster } from 'react-hot-toast';
 import Link from "next/link";
 import { Label } from "@/components/ui/aceternity/label";
 import { Input } from "@/components/ui/aceternity/input";
@@ -34,7 +35,7 @@ export function LoginForm() {
       console.log("Form submitted");
       window.location.href = "/dashboard";
     } else {
-      console.error('Error during login');
+      toast.error('Invalid email or password');
     }
   };
 
@@ -64,7 +65,7 @@ export function LoginForm() {
           Log in &rarr;
           <BottomGradient />
         </button>
-
+        <Toaster />
         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
 
         <div className="flex justify-center">

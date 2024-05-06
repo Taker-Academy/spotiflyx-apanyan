@@ -7,10 +7,10 @@ import (
 type User struct {
     ID       uint      `gorm:"primaryKey" json:"id"`
     Username string    `gorm:"uniqueIndex;not null" json:"username"`
-    FirstName string   `gorm:"not null" json:firstname`
-    LastName string    `gorm:"not null" json:lastname`
+    FirstName string   `gorm:"not null" json:"firstname"`
+    LastName string    `gorm:"not null" json:"lastname"`
     Email    string    `gorm:"uniqueIndex;not null" json:"email"`
-    Password string    `gorm:"not null" json:"-"`
+    Password string    `gorm:"not null" json:"password"`
     Date     time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"date"`
 }
 

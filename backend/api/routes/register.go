@@ -1,9 +1,11 @@
 package routes
 
 import (
+	"log"
+	"fmt"
 	"time"
 	"github.com/gofiber/fiber/v2"
-
+	"github.com/mailjet/mailjet-apiv3-go/v4"
 	"api/models"
 	"api/middleware"
 	"api/database"
@@ -40,6 +42,12 @@ func RegisterHandler(c *fiber.Ctx) error {
             "error": "Internal server error",
         })
     }
+	if err := sendConfirmationEmail(newUser.Email, newUser.FirstName); err != nil {
+        return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+            "ok":    false,
+            "error": "Erreur lors de l'envoi de l'e-mail de confirmation",
+        })
+    }
 	token, err := middleware.GenerateJWT(newUser.ID)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
@@ -59,4 +67,33 @@ func RegisterHandler(c *fiber.Ctx) error {
 		},
 	}
 	return c.Status(fiber.StatusCreated).JSON(response)
+}
+
+func sendConfirmationEmail(to string, name string) error {
+	mailjetClient := mailjet.NewMailjetClient(os.Getenv("MAILJET_PUBLIC_KEY"), os.Getenv("MAILJET_PRIVATE_KEY"))
+	messagesInfo := []mailjet.InfoMessagesV31 {
+		{
+		From: &mailjet.RecipientV31{
+			Email: "alexandre.bacha@epitech.eu",
+			Name: "L'equipe Spotiflyx",
+		},
+		To: &mailjet.RecipientsV31{
+			mailjet.RecipientV31 {
+			Email: to,
+			Name: name,
+			},
+		},
+		Subject: "Confirmation de création de compte",
+		TextPart: "Bonjour, votre compte a été crée avec succes ",
+		HTMLPart: "<h3>Nous vous confirmons la création et l'activation de votre compte . Vous pouvez retrouver dès à présent le meilleur du divertissement sur <a href='http://localhost:4321/'>Spotiflyx</a>!</h3><br />A volonté et sans modération !",
+		CustomID: "AppGettingStartedTest",
+		},
+	}
+	messages := mailjet.MessagesV31{Info: messagesInfo}
+	res, err := mailjetClient.SendMailV31(&messages)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("Data: %+v\n", res)
+	return nil
 }

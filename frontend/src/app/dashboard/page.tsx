@@ -48,7 +48,7 @@ export default function Dashboard() {
 
       if (response.ok) {
         const data = await response.json();
-        setUserFirstName(data.data.FirstName);
+        setUserFirstName(data.data.firstName);
       } else {
         console.error('Failed to fetch user data');
       }

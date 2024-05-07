@@ -30,6 +30,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import AddMedia from "@/components/AddMedia"
 
 export default function Dashboard() {
   const [token] = useLocalStorage('token', null); // get the token from local storage
@@ -227,6 +228,7 @@ export default function Dashboard() {
               className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[336px]"
             />
           </div>
+          <AddMedia />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="secondary" size="icon" className="rounded-full">

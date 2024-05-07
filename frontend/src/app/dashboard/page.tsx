@@ -249,6 +249,14 @@ export default function Dashboard() {
         <h1 className="text-5xl ml-8">
           {previousRoute === '/signup' ? 'Welcome' : 'Welcome back'}, {userFirstName}!
         </h1>
+        <main className="mt-4 flex justify-evenly">
+          <section>
+            <h1 className="text-3xl">Recent videos</h1>
+          </section>
+          <section>
+            <h1 className="text-3xl">Recent musics</h1>
+          </section>
+        </main>
       </div>
     </div>
   )

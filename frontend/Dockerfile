@@ -1,4 +1,4 @@
-FROM node:alpine AS runtime
+FROM node:alpine AS build
 
 WORKDIR /app
 
@@ -10,7 +10,15 @@ RUN pnpm install
 
 COPY . .
 
+RUN pnpm build
+
+FROM node:alpine AS runtime
+
+WORKDIR /app
+
+COPY --from=build /app .
+
 ENV HOST=0.0.0.0
 ENV PORT=3000
 EXPOSE 3000
-CMD [ "pnpm", "dev" ]
+CMD [ "npx", "pnpm", "start" ]

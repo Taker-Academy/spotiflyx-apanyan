@@ -8,15 +8,16 @@ import (
 
 	"api/database"
 	"api/middleware"
-	"api/routes"
+	"api/routes/auth"
+    "api/routes/user"
 )
 
 func setupRoutes(app *fiber.App) {
-    app.Post("/auth/register", routes.RegisterHandler)
-    app.Post("/auth/login", routes.LoginHandler)
-    app.Get("/user/me", middleware.Authenticate, routes.InfoHandler)
-	app.Put("/user/edit", middleware.Authenticate, routes.EditHandler)
-    app.Delete("/user/remove", middleware.Authenticate, routes.RemoveHandler)
+    app.Post("/auth/register", auth.RegisterHandler)
+    app.Post("/auth/login", auth.LoginHandler)
+    app.Get("/user/me", middleware.Authenticate, user.InfoHandler)
+	app.Put("/user/edit", middleware.Authenticate, user.EditHandler)
+    app.Delete("/user/remove", middleware.Authenticate, user.RemoveHandler)
 }
 
 func main() {

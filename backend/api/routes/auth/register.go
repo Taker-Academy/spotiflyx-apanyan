@@ -1,4 +1,4 @@
-package routes
+package auth
 
 import (
 	"log"
@@ -62,6 +62,7 @@ func RegisterHandler(c *fiber.Ctx) error {
 			"user": fiber.Map{
 				"email":     newUser.Email,
 				"firstName": newUser.FirstName,
+				"username":  newUser.Username,
 				"lastName":  newUser.LastName,
 			},
 		},

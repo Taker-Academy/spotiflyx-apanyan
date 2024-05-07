@@ -1,4 +1,4 @@
-package routes
+package user
 
 import (
 	"github.com/gofiber/fiber/v2"

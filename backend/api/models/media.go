@@ -7,10 +7,11 @@ import (
 type Media struct {
     ID      uint      `gorm:"primaryKey" json:"id"`
     Type    string    `gorm:"check:(type IN ('vidéo', 'musique'))" json:"type"`
-    Name    string    `gorm:"not null" json:"name"`
+    Title    string    `gorm:"not null" json:"title"`
     Artiste string    `gorm:"not null" json:"artiste"`
     Link    string    `gorm:"not null" json:"link"`
     Date    time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"date"`
+    Username string    `gorm:"uniqueIndex;not null" json:"username"`
     UserID  uint      `json:"user_id"`
 }
 

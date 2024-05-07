@@ -1,5 +1,5 @@
 "use client"
-import { use, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import { useCheckAuth } from "@/app/auth/useCheckAuth"
 import logout from "@/app/auth/logout"
@@ -22,7 +22,6 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
@@ -36,6 +35,15 @@ export default function Dashboard() {
   const [token] = useLocalStorage('token', null); // get the token from local storage
   useCheckAuth(token); // call checkAuth after the token has been retrieved
   const [userFirstName, setUserFirstName] = useState('');
+  const [previousRoute, setPreviousRoute] = useState<string | null>(null);
+
+  useEffect(() => {
+    const route = localStorage.getItem('previousRoute');
+    if (route === '/signup') {
+      setPreviousRoute(route);
+      localStorage.removeItem('previousRoute');
+    }
+  }, []);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -54,7 +62,7 @@ export default function Dashboard() {
     };
 
     fetchUserData();
-  }, [token]); // add token as a dependency
+  }, [token]);
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
@@ -232,11 +240,13 @@ export default function Dashboard() {
               <Link href="/settings"><DropdownMenuItem>Settings</DropdownMenuItem></Link>
               <DropdownMenuItem>Support</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <Link href="/"><DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem></Link>
+              <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </header>
-        <h1 className="text-5xl ml-8">Welcome back, {userFirstName}!</h1>
+        <h1 className="text-5xl ml-8">
+          {previousRoute === '/signup' ? 'Welcome' : 'Welcome back'}, {userFirstName}!
+        </h1>
       </div>
     </div>
   )

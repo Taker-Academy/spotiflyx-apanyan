@@ -37,6 +37,7 @@ export function SignupForm() {
       const data = await response.json();
       localStorage.setItem('token', data.data.token);
       window.location.href = "/dashboard";
+      localStorage.setItem('previousRoute', '/signup');
     } else {
       console.error('Erreur lors de l\'inscription');
     }

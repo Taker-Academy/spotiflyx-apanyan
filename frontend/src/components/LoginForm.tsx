@@ -70,7 +70,7 @@ export function LoginForm() {
 
         <div className="flex justify-center">
           <p className="text-white">
-            Don't have an account ?
+            Don{"'"}t have an account ?
             <Link href="/signup">
               <span
                 className="text-pink-500 group cursor-pointer relative inline-block ml-1"

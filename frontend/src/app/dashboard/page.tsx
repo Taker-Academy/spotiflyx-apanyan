@@ -1,8 +1,9 @@
 "use client"
-import { useEffect, useState } from "react"
+import { use, useEffect, useState } from "react"
 import Link from "next/link"
 import { useCheckAuth } from "@/app/auth/useCheckAuth"
 import logout from "@/app/auth/logout"
+import useLocalStorage from "@/app/auth/useLocalStorage"
 
 import {
   Home,
@@ -32,14 +33,12 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
 export default function Dashboard() {
-  const token = localStorage.getItem('token'); // get the token from local storage
+  const [token] = useLocalStorage('token', null); // get the token from local storage
   useCheckAuth(token); // call checkAuth after the token has been retrieved
   const [userFirstName, setUserFirstName] = useState('');
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const token = localStorage.getItem('token'); // get the token from local storage
-
       const response = await fetch('http://127.0.0.1:8080/user/me', {
         headers: {
           'Authorization': `Bearer ${token}`
@@ -55,7 +54,7 @@ export default function Dashboard() {
     };
 
     fetchUserData();
-  }, []);
+  }, [token]); // add token as a dependency
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">

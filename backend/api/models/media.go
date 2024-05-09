@@ -11,7 +11,6 @@ type Media struct {
     Artiste string    `gorm:"not null" json:"artiste"`
     Link    string    `gorm:"not null" json:"link"`
     Date    time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"date"`
-    Username string    `gorm:"uniqueIndex;not null" json:"username"`
     UserID  uint      `json:"user_id"`
 }
 

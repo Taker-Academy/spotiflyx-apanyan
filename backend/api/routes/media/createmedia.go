@@ -35,7 +35,6 @@ func CreatePostHandler(c *fiber.Ctx) error {
 		Type:      requestBody.Type,
 		Link:	   requestBody.Link,
         UserID:    user.ID,
-        Username:  user.Username,
     }
     db := database.GetDB()
     if err := db.Create(&media).Error; err != nil {
@@ -50,7 +49,6 @@ func CreatePostHandler(c *fiber.Ctx) error {
         "date":		 media.Date,
 		"type":		 media.Type,
         "userId":    media.UserID,
-        "Username":  media.Username,
         "title":     media.Date,
 		"link":		 media.Link,
     }

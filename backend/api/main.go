@@ -9,8 +9,8 @@ import (
 	"api/database"
 	"api/middleware"
 	"api/routes/auth"
-	"api/routes/media"
 	"api/routes/user"
+    "api/routes/media"
 )
 
 func setupRoutes(app *fiber.App) {
@@ -21,6 +21,8 @@ func setupRoutes(app *fiber.App) {
     app.Delete("/user/remove", middleware.Authenticate, user.RemoveHandler)
     app.Get("/media/", middleware.Authenticate, media.GetPostsHandler)
 	app.Post("/media/", middleware.Authenticate, media.CreatePostHandler)
+    app.Get("/media/me", middleware.Authenticate, media.GetUserPostsHandler)
+    app.Get("/post/:id", middleware.Authenticate, media.GetPostDetailsHandler)
 }
 
 func main() {

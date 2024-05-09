@@ -22,7 +22,7 @@ func setupRoutes(app *fiber.App) {
     app.Get("/media/", middleware.Authenticate, media.GetPostsHandler)
 	app.Post("/media/", middleware.Authenticate, media.CreatePostHandler)
     app.Get("/media/me", middleware.Authenticate, media.GetUserPostsHandler)
-    app.Get("/post/:id", middleware.Authenticate, media.GetPostDetailsHandler)
+    app.Get("/media/:id", middleware.Authenticate, media.GetPostDetailsHandler)
 }
 
 func main() {

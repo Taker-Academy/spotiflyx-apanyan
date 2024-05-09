@@ -15,7 +15,6 @@ func GetPostDetailsHandler(c *fiber.Ctx) error {
             "error": "Mauvaise requête, paramètres manquants ou invalides",
         })
     }
-
     var media models.Media
     db := database.GetDB()
     if err := db.First(&media, mediaID).Error; err != nil {

@@ -23,6 +23,7 @@ func GetPostsHandler(c *fiber.Ctx) error {
             "date": 	media.Date,
             "userId":   media.UserID,
 			"username": media.Username,
+            "link":     media.Link,
             "title":    media.Title,
             "artiste":  media.Artiste,
         }

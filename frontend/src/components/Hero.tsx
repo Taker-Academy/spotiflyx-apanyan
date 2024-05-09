@@ -13,7 +13,7 @@ export default function Hero() {
             </h2>
             <Link href="/signup">
                 <button
-                    className="animate-bounce cursor-pointer py-3 px-7 mb-3 border-2 border-gray-800 rounded-full hover:bg-gray-800 hover:-translate-y-1 transition-all duration-200"
+                    className="animate-bounce cursor-pointer py-3 px-7 mb-3 border-2 border-gray-800 rounded-full hover:bg-gray-800 transition"
                 >Start Streaming Now</button>
             </Link>
             <p>

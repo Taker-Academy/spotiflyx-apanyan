@@ -9,8 +9,10 @@ import (
 	"api/database"
 	"api/middleware"
 	"api/routes/auth"
+	"api/routes/favoris"
+	"api/routes/likes"
+	"api/routes/media"
 	"api/routes/user"
-    "api/routes/media"
 )
 
 func setupRoutes(app *fiber.App) {
@@ -19,10 +21,17 @@ func setupRoutes(app *fiber.App) {
     app.Get("/user/me", middleware.Authenticate, user.InfoHandler)
 	app.Put("/user/edit", middleware.Authenticate, user.EditHandler)
     app.Delete("/user/remove", middleware.Authenticate, user.RemoveHandler)
-    app.Get("/media/", middleware.Authenticate, media.GetPostsHandler)
-	app.Post("/media/", middleware.Authenticate, media.CreatePostHandler)
-    app.Get("/media/me", middleware.Authenticate, media.GetUserPostsHandler)
-    app.Get("/media/:id", middleware.Authenticate, media.GetPostDetailsHandler)
+    app.Get("/media/", middleware.Authenticate, media.GetMediasHandler)
+	app.Post("/media/", middleware.Authenticate, media.CreateMediaHandler)
+    app.Get("/media/me", middleware.Authenticate, media.GetUserMediasHandler)
+    app.Get("/media/:id", middleware.Authenticate, media.GetMediaDetailsHandler)
+    app.Delete("/media/:id", middleware.Authenticate, media.DeleteMediaHandler)
+    app.Post("/likes/:id", middleware.Authenticate, likes.LikeMediaHandler)
+    app.Get("/likes/:id", middleware.Authenticate, likes.GetMediaLikesHandler)
+    app.Delete("/likes/:id", middleware.Authenticate, likes.UnlikeMediaHandler)
+    app.Post("/favoris/:id", middleware.Authenticate, favoris.AddToFavoriteHandler)
+    app.Get("/favoris/:id", middleware.Authenticate, favoris.GetUserFavoriteMediaHandler)
+    app.Delete("/favoris/:id", middleware.Authenticate, favoris.RemoveFromFavoritesHandler)
 }
 
 func main() {

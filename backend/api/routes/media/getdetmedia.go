@@ -7,7 +7,7 @@ import (
     "gorm.io/gorm"
 )
 
-func GetPostDetailsHandler(c *fiber.Ctx) error {
+func GetMediaDetailsHandler(c *fiber.Ctx) error {
     mediaID := c.Params("id")
     if mediaID == "" {
         return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{

@@ -8,7 +8,7 @@ import (
 	"api/middleware"
 )
 
-func CreatePostHandler(c *fiber.Ctx) error {
+func CreateMediaHandler(c *fiber.Ctx) error {
     claims := c.Locals("user").(*middleware.CustomClaims)
     userID := claims.UserID
     user, err := database.GetUserByID(userID)

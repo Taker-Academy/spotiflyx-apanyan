@@ -8,7 +8,7 @@ import (
     "gorm.io/gorm"
 )
 
-func DeletePostHandler(c *fiber.Ctx) error {
+func DeleteMediaHandler(c *fiber.Ctx) error {
     mediaID := c.Params("id")
     if mediaID == "" {
         return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{

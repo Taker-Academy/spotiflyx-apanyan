@@ -6,7 +6,7 @@ import (
     "api/database"
 )
 
-func GetPostsHandler(c *fiber.Ctx) error {
+func GetMediasHandler(c *fiber.Ctx) error {
     db := database.GetDB()
     var medias []models.Media
     if err := db.Order("date DESC").Find(&medias).Error; err != nil {

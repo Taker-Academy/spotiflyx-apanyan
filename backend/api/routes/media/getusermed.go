@@ -7,7 +7,7 @@ import (
 	"api/middleware"
 )
 
-func GetUserPostsHandler(c *fiber.Ctx) error {
+func GetUserMediasHandler(c *fiber.Ctx) error {
     claims := c.Locals("user").(*middleware.CustomClaims)
     userID := claims.UserID
     db := database.GetDB()

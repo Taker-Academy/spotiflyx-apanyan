@@ -17,6 +17,6 @@ services:
 
   db:
     build:
-      context: ./backend/postgres
+      context: ./backend/db
     ports:
       - "5432:5432"

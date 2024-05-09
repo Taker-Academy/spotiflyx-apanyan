@@ -76,11 +76,11 @@ export default function Dashboard() {
             className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
           >
             <Image
-            className="h-full w-full transition-all group-hover:scale-110"
-            src="/icon.png"
-            alt="Spotiflyx logo"
-            width="594"
-            height="594"
+              className="h-full w-full transition-all group-hover:scale-110"
+              src="/icon.png"
+              alt="Spotiflyx logo"
+              width="594"
+              height="594"
             />
             <span className="sr-only">Spotiflyx</span>
           </Link>
@@ -168,8 +168,7 @@ export default function Dashboard() {
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <Link href="/settings"><DropdownMenuItem>Settings</DropdownMenuItem></Link>
-              <DropdownMenuItem>Support</DropdownMenuItem>
+              <Link href="/profile"><DropdownMenuItem>Profile</DropdownMenuItem></Link>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
             </DropdownMenuContent>

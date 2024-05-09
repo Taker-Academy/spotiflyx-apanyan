@@ -3,36 +3,18 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { useCheckAuth } from "@/app/auth/useCheckAuth"
-import logout from "@/app/auth/logout"
 import useLocalStorage from "@/app/auth/useLocalStorage"
 
 import {
   Home,
-  LineChart,
   Package2,
-  ShoppingCart,
-  Package,
   PanelLeft,
-  Users2,
-  Settings,
-  Search,
   CircleUser,
-  Circle,
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-import AddMedia from "@/components/AddMedia"
 import DeleteAccount from "@/components/DeleteAccount"
 import UpdateProfile from "@/components/UpdateProfile"
 
@@ -157,7 +139,7 @@ export default function Dashboard() {
         </h1>
         <main className="mt-4 flex justify-evenly">
           <UpdateProfile />
-          <DeleteAccount />
+          <DeleteAccount token={token} />
         </main>
       </div>
     </div>

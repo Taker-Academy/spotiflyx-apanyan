@@ -21,7 +21,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import DeleteAccount from "@/components/DeleteAccount"
 
 export default function Settings() {
   return (
@@ -165,49 +167,33 @@ export default function Settings() {
           <div className="grid gap-6">
             <Card x-chunk="dashboard-04-chunk-1">
               <CardHeader>
-                <CardTitle>Store Name</CardTitle>
+                <CardTitle>Update your profile</CardTitle>
                 <CardDescription>
-                  Used to identify your store in the marketplace.
+                  If you need some fresh air.
                 </CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="space-y-4">
                 <form>
-                  <Input placeholder="Store Name" />
+                  <Input placeholder="New username" />
+                </form>
+                <form>
+                  <Input placeholder="New email address" />
+                </form>
+                <form>
+                  <Input placeholder="New first name" />
+                </form>
+                <form>
+                  <Input placeholder="New last name" />
+                </form>
+                <form>
+                  <Input placeholder="New password" />
                 </form>
               </CardContent>
               <CardFooter className="border-t px-6 py-4">
                 <Button>Save</Button>
               </CardFooter>
             </Card>
-            <Card x-chunk="dashboard-04-chunk-2">
-              <CardHeader>
-                <CardTitle>Plugins Directory</CardTitle>
-                <CardDescription>
-                  The directory within your project, in which your plugins are
-                  located.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <form className="flex flex-col gap-4">
-                  <Input
-                    placeholder="Project Name"
-                    defaultValue="/content/plugins"
-                  />
-                  <div className="flex items-center space-x-2">
-                    <Checkbox id="include" defaultChecked />
-                    <label
-                      htmlFor="include"
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    >
-                      Allow administrators to change the directory.
-                    </label>
-                  </div>
-                </form>
-              </CardContent>
-              <CardFooter className="border-t px-6 py-4">
-                <Button>Save</Button>
-              </CardFooter>
-            </Card>
+            <DeleteAccount />
           </div>
         </div>
       </main>

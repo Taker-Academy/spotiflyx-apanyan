@@ -32,6 +32,8 @@ import {
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import AddMedia from "@/components/AddMedia"
+import DeleteAccount from "@/components/DeleteAccount"
+import UpdateProfile from "@/components/UpdateProfile"
 
 export default function Dashboard() {
   const [token] = useLocalStorage('token', null); // get the token from local storage
@@ -81,8 +83,8 @@ export default function Dashboard() {
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
-                  href="#"
-                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                  href="/dashboard"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                 >
                   <Home className="h-5 w-5" />
                   <span className="sr-only">Dashboard</span>
@@ -96,7 +98,7 @@ export default function Dashboard() {
               <TooltipTrigger asChild>
                 <Link
                   href="/profile"
-                  className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                 >
                   <CircleUser className="h-5 w-5" />
                   <span className="sr-only">Profile</span>
@@ -142,42 +144,13 @@ export default function Dashboard() {
               </nav>
             </SheetContent>
           </Sheet>
-          <div className="relative ml-auto flex-1 md:grow-0">
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input
-              type="search"
-              placeholder="Search..."
-              className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[336px]"
-            />
-          </div>
-          <AddMedia />
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="secondary" size="icon" className="rounded-full">
-                <CircleUser className="h-5 w-5" />
-                <span className="sr-only">Toggle user menu</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <Link href="/settings"><DropdownMenuItem>Settings</DropdownMenuItem></Link>
-              <DropdownMenuItem>Support</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
         </header>
-        <h1 className="text-5xl ml-8">
-          {previousRoute === '/signup' ? 'Welcome' : 'Welcome back'}, {userFirstName}!
+        <h1 className="text-5xl ml-8 mt-10">
+          Your profile
         </h1>
         <main className="mt-4 flex justify-evenly">
-          <section>
-            <h1 className="text-3xl">Recent videos</h1>
-          </section>
-          <section>
-            <h1 className="text-3xl">Recent musics</h1>
-          </section>
+          <UpdateProfile />
+          <DeleteAccount />
         </main>
       </div>
     </div>

@@ -1,23 +1,68 @@
+"use client"
+import { useState } from 'react'
+import { Menu, Package2, Home, CircleUser } from 'lucide-react';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import { Button } from '@/components/ui/button'
 import Image from 'next/image';
 import Link from 'next/link';
 
 export default function IndexNavbar() {
     return (
-        <header className="text-white font-bold flex justify-between items-center mx-16 mt-8 mb-56">
-            <div className="logo cursor-pointer hover:text-slate-300 transition-all duration-200">
-                <Link href="/dashboard"><Image src="/icon.png" alt="Spotiflyx logo" height="50" width="50" /></Link>
-            </div>
-            <div className="navbar flex gap-6">
-                <ul className="flex gap-6 items-center">
-                    <li className="cursor-pointer py-3 px-7 rounded-full hover:bg-gray-800 hover:-translate-y-1 transition-all duration-200">About us</li>
-                    <li className="cursor-pointer py-3 px-7 rounded-full hover:bg-gray-800 hover:-translate-y-1 transition-all duration-200">Services</li>
-                    <li className="cursor-pointer py-3 px-7 rounded-full hover:bg-gray-800 hover:-translate-y-1 transition-all duration-200">Contact us</li>
-                </ul>
-                <ul className="flex gap-4 items-center">
-                    <Link href="/login"><li className="cursor-pointer py-3 px-7 border-2 rounded-full hover:bg-gray-800 hover:-translate-y-1 transition-all duration-200">Log in</li></Link>
-                    <Link href="/signup"><li className="cursor-pointer py-3 px-7 border-2 rounded-full hover:bg-gray-800 hover:-translate-y-1 transition-all duration-200">Sign up</li></Link>
-                </ul>
-            </div>
+        <header className="absolute inset-x-0 top-0 z-50">
+            <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
+                <div className="flex lg:flex-1">
+                    <Link href="/dashboard" className="-m-1.5 p-1.5 hover:scale-105 transition">
+                        <span className="sr-only">Your Company</span>
+                        <Image
+                            className="h-12 w-auto"
+                            src="/icon.png"
+                            alt=""
+                            width="100"
+                            height="100"
+                        />
+                    </Link>
+                </div>
+                <div className="flex lg:hidden">
+                    <Sheet>
+                        <SheetTrigger asChild>
+                            <Button size="icon" variant="outline" className="sm:hidden">
+                                <Menu className="h-5 w-5" />
+                                <span className="sr-only">Toggle Menu</span>
+                            </Button>
+                        </SheetTrigger>
+                        <SheetContent side="left" className="sm:max-w-xs">
+                            <nav className="grid gap-6 text-lg font-medium">
+                                <Link
+                                    href="#"
+                                    className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
+                                >
+                                    <Package2 className="h-5 w-5 transition-all group-hover:scale-110" />
+                                    <span className="sr-only">Spotiflyx</span>
+                                </Link>
+                                <Link
+                                    href="#"
+                                    className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                                >
+                                    <Home className="h-5 w-5" />
+                                    Dashboard
+                                </Link>
+                                <Link
+                                    href="#"
+                                    className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                                >
+                                    <CircleUser className="h-5 w-5" />
+                                    Profile
+                                </Link>
+                            </nav>
+                        </SheetContent>
+                    </Sheet>
+                </div>
+                <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-4">
+                    <Link href="/login"><button className="cursor-pointer py-3 px-7 border-2 rounded-full hover:-translate-y-1 transition-all duration-200 border-input bg-background hover:bg-accent hover:text-accent-foreground">Log in</button></Link>
+                    <Link href="/signup"><button className="cursor-pointer py-3 px-7 border-2 rounded-full hover:-translate-y-1 transition-all duration-200 bg-primary/90 text-primary-foreground hover:bg-primary/70">Sign up</button></Link>
+                </div>
+            </nav>
+
         </header>
     );
 }

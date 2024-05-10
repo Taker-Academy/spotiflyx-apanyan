@@ -33,6 +33,8 @@ import {
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import AddMedia from "@/components/AddMedia"
+import RecentVideos from "@/components/RecentVideos"
+import RecentMusics from "@/components/RecentMusics"
 
 export default function Dashboard() {
   const [token] = useLocalStorage('token', null); // get the token from local storage
@@ -178,12 +180,8 @@ export default function Dashboard() {
           {previousRoute === '/signup' ? 'Welcome' : 'Welcome back'}, {userFirstName}!
         </h1>
         <main className="mt-4 flex justify-evenly">
-          <section>
-            <h1 className="text-3xl">Recent videos</h1>
-          </section>
-          <section>
-            <h1 className="text-3xl">Recent musics</h1>
-          </section>
+          <RecentVideos />
+          <RecentMusics />
         </main>
       </div>
     </div>

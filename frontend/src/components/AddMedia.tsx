@@ -19,11 +19,10 @@ import { mutate } from 'swr';
 export default function AddMedia() {
   const [title, setTitle] = useState('');
   const [link, setLink] = useState('');
-  const mediaTypeRef = useRef<HTMLInputElement | null>(null);
+  const [mediaType, setMediaType] = useState('video'); // default to 'video'
   const [token] = useLocalStorage('token', null); // get the token from local storage
 
-const addMedia = async () => {
-  if (mediaTypeRef.current) {
+  const addMedia = async () => {
     const response = await fetch('http://localhost:8080/media', {
       method: 'POST',
       headers: {
@@ -31,7 +30,7 @@ const addMedia = async () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        type: mediaTypeRef.current.value,
+        type: mediaType, // use the state variable here
         title,
         link,
       }),
@@ -45,8 +44,7 @@ const addMedia = async () => {
     } else {
       console.error('An error occurred while creating the media:', data.error);
     }
-  }
-};
+  };
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -57,7 +55,7 @@ const addMedia = async () => {
           <AlertDialogTitle className="text-3xl mb-2">Create a new media</AlertDialogTitle>
           <section>
             <h1 className="text-xl mb-2">What type of content do you want to post ?</h1>
-            <RadioGroup ref={mediaTypeRef} defaultValue="video">
+            <RadioGroup value={mediaType} onValueChange={setMediaType}>
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="video" id="video" />
                 <Label htmlFor="video">Video</Label>

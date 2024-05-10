@@ -70,7 +70,7 @@ export default function RecentVideos() {
   return (
     <section>
       <h1 className="text-3xl text-center">Recent videos</h1>
-      {medias.map((media: Media) => (
+      {medias.filter((media: { type: string; }) => media.type === 'video').map((media: Media) => (
         <div key={media.id}>
           <h2>{media.title}</h2>
           <p>{media.artiste}</p>

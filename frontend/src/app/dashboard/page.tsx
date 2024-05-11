@@ -1,4 +1,5 @@
 "use client"
+import useSWR from 'swr';
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
@@ -8,16 +9,10 @@ import useLocalStorage from "@/app/auth/useLocalStorage"
 
 import {
   Home,
-  LineChart,
   Package2,
-  ShoppingCart,
-  Package,
   PanelLeft,
-  Users2,
-  Settings,
   Search,
   CircleUser,
-  Circle,
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -39,8 +34,23 @@ import RecentMusics from "@/components/RecentMusics"
 export default function Dashboard() {
   const [token] = useLocalStorage('token', null); // get the token from local storage
   useCheckAuth(token); // call checkAuth after the token has been retrieved
-  const [userFirstName, setUserFirstName] = useState('');
   const [previousRoute, setPreviousRoute] = useState<string | null>(null);
+
+  const { data: userData, error } = useSWR('http://127.0.0.1:8080/user/me', async url => {
+    const response = await fetch(url, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch user data');
+    }
+
+    return response.json();
+  });
+
+  const userFirstName = userData?.data.firstName;
 
   useEffect(() => {
     const route = localStorage.getItem('previousRoute');
@@ -49,25 +59,6 @@ export default function Dashboard() {
       localStorage.removeItem('previousRoute');
     }
   }, []);
-
-  useEffect(() => {
-    const fetchUserData = async () => {
-      const response = await fetch('http://127.0.0.1:8080/user/me', {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setUserFirstName(data.data.firstName);
-      } else {
-        console.error('Failed to fetch user data');
-      }
-    };
-
-    fetchUserData();
-  }, [token]);
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
@@ -179,7 +170,7 @@ export default function Dashboard() {
         <h1 className="text-5xl ml-8">
           {previousRoute === '/signup' ? 'Welcome' : 'Welcome back'}, {userFirstName}!
         </h1>
-        <main className="mt-4 flex justify-evenly">
+        <main className="mt-4 flex flex-wrap justify-evenly">
           <RecentVideos />
           <RecentMusics />
         </main>

@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
 import logout from '@/app/auth/logout';
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster, toast } from 'sonner'
 
 export default function DeleteAccount({ token }: { token: string }) {
     console.log(token)
@@ -48,7 +48,7 @@ export default function DeleteAccount({ token }: { token: string }) {
 
     return (
         <AlertDialog>
-            <Toaster />
+            <Toaster richColors position="top-center" />
             <AlertDialogTrigger asChild>
                 <Button variant="destructive">Delete account</Button>
             </AlertDialogTrigger>

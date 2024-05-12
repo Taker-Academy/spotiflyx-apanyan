@@ -4,7 +4,7 @@ import { Menu, Package2, Home, CircleUser } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image';
-import Link from 'next/link';
+import { Link } from 'next-view-transitions';;
 
 export default function IndexNavbar() {
     return (

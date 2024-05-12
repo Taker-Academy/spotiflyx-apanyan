@@ -1,5 +1,5 @@
 import { SignupForm } from "@/components/SignupForm";
-import Link from "next/link";
+import { Link } from 'next-view-transitions';;
 
 export default function Signup() {
     return (

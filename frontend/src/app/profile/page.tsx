@@ -1,6 +1,6 @@
 "use client"
 import { useEffect, useState } from "react"
-import Link from "next/link"
+import { Link } from 'next-view-transitions';
 import Image from "next/image"
 import { useCheckAuth } from "@/app/auth/useCheckAuth"
 import useLocalStorage from "@/app/auth/useLocalStorage"

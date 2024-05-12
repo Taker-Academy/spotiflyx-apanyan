@@ -1,7 +1,7 @@
 "use client"
 import useSWR from 'swr';
 import { useEffect, useState } from "react"
-import Link from "next/link"
+import { Link } from 'next-view-transitions';
 import Image from "next/image"
 import { useCheckAuth } from "@/app/auth/useCheckAuth"
 import logout from "@/app/auth/logout"

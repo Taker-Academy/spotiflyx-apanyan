@@ -14,14 +14,29 @@ import {
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Toaster, toast } from 'sonner'
 
 export default function UpdateProfile({ token }: { token: string }) {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleUpdate = async () => {
+  const validatePasswords = () => {
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match");
+      return false;
+    } else if (password.length < 6 && password !== '') {
+      toast.error("Password must be at least 6 characters");
+      return false;
+    }
+    toast.success("Password changed successfully");
+    return true;
+  };
+
+  const updateUser = async () => {
+    console.log('updateUser');
     const response = await fetch('http://127.0.0.1:8080/user/edit', {
       method: 'PUT',
       headers: {
@@ -37,7 +52,7 @@ export default function UpdateProfile({ token }: { token: string }) {
     });
 
     if (!response.ok) {
-      // handle error
+      toast.error("An error occured, password not changed");
     }
 
     const data = await response.json();
@@ -46,8 +61,19 @@ export default function UpdateProfile({ token }: { token: string }) {
     mutate('http://127.0.0.1:8080/user/edit', data, false);
   };
 
+  const handleUpdate = async (event: any) => {
+
+    if (password && !validatePasswords()) {
+      event.preventDefault();
+      return;
+    }
+
+    await updateUser();
+  };
+
   return (
     <AlertDialog>
+      <Toaster richColors position="top-center" />
       <AlertDialogTrigger asChild>
         <Button>Update profile</Button>
       </AlertDialogTrigger>
@@ -73,14 +99,17 @@ export default function UpdateProfile({ token }: { token: string }) {
                 <Input className="mt-2" id="new-password" placeholder="New password" type="password" value={password} onChange={e => setPassword(e.target.value)} />
               </form>
               <form>
-                <Input id="confirm-new-password" placeholder="Confirm new password" type="password" />
+                <Label htmlFor="confirm-new-password">Confirm Password</Label>
+                <Input className="mt-2" id="confirm-new-password" placeholder="Confirm new password" type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
               </form>
             </div>
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={handleUpdate}>Update your account</AlertDialogAction>
+          <AlertDialogAction onClick={(event) => handleUpdate(event)}>
+            Update your account
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

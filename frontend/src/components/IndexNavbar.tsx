@@ -36,21 +36,25 @@ export default function IndexNavbar() {
                                     href="/dashboard"
                                     className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
                                 >
-                                    <Package2 className="h-5 w-5 transition-all group-hover:scale-110" />
+                                    <Image
+                                        className="h-10 w-10"
+                                        src="/icon.png"
+                                        alt=""
+                                        width="100"
+                                        height="100"
+                                    />
                                     <span className="sr-only">Spotiflyx</span>
                                 </Link>
                                 <Link
                                     href="/login"
                                     className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                                 >
-                                    <Home className="h-5 w-5" />
                                     Log in
                                 </Link>
                                 <Link
                                     href="/register"
                                     className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                                 >
-                                    <CircleUser className="h-5 w-5" />
                                     Register
                                 </Link>
                             </nav>

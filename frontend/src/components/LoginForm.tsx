@@ -32,7 +32,6 @@ export function LoginForm() {
     if (response.ok) {
       const data = await response.json();
       localStorage.setItem('token', data.data.token);
-      console.log("Form submitted");
       window.location.href = "/dashboard";
     } else {
       toast.error('Invalid email or password');

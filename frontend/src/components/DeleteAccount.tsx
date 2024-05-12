@@ -15,7 +15,6 @@ import logout from '@/app/auth/logout';
 import { Toaster, toast } from 'sonner'
 
 export default function DeleteAccount({ token }: { token: string }) {
-    console.log(token)
     const [isLoading, setIsLoading] = useState(false);
 
     const handleDeleteAccount = async () => {

@@ -45,7 +45,7 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <DefaultLayout>
+    <DefaultLayout currentPage="Dashboard">
       <h1 className="text-5xl ml-8">
         {previousRoute === '/signup' ? 'Welcome' : 'Welcome back'}, {userFirstName}!
       </h1>

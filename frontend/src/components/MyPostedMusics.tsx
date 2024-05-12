@@ -62,7 +62,7 @@ async function fetcher([url, token]: [string, string]) {
 
 export default function MyPostedMusics() {
   const [token] = useLocalStorage('token', null);
-  const { data: medias, error } = useSWR(['http://127.0.0.1:8080/media', token], fetcher);
+  const { data: medias, error } = useSWR(['http://127.0.0.1:8080/media/me', token], fetcher);
 
   if (error) return <div>Error: {error.message}</div>;
   if (!medias) return <h1 className="text-3xl">Recent musics</h1>;

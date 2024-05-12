@@ -75,7 +75,7 @@ export default function Profile() {
             />
           </div>
           <div className="w-1/2 mt-4 flex justify-evenly max-sm:gap-6 max-sm:justify-center">
-            <UpdateProfile />
+            <UpdateProfile token={token} />
             <DeleteAccount token={token} />
           </div>
         </main>

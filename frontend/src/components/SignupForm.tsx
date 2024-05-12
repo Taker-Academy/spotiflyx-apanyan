@@ -1,21 +1,32 @@
 "use client";
-import React from "react";
-import { Link } from 'next-view-transitions';;
+import React, { useState } from "react";
+import { Link } from 'next-view-transitions';
 import { Label } from "@/components/ui/aceternity/label";
 import { Input } from "@/components/ui/aceternity/input";
 import { cn } from "@/lib/utils";
+import { Toaster, toast } from 'sonner';
 
 export function SignupForm() {
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Récupérer les valeurs des champs du formulaire
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
+
+    if (password.length < 6) {
+      toast.error('Password must be at least 6 characters');
+      return;
+    }
+
     const firstName = (document.getElementById('firstname') as HTMLInputElement).value;
     const lastName = (document.getElementById('lastname') as HTMLInputElement).value;
     const email = (document.getElementById('email') as HTMLInputElement).value;
-    const password = (document.getElementById('password') as HTMLInputElement).value;
 
-    // Créer l'objet utilisateur
     const user = {
       firstName,
       lastName,
@@ -23,7 +34,6 @@ export function SignupForm() {
       password
     };
 
-    // Envoyer la requête POST au backend
     const response = await fetch('http://127.0.0.1:8080/auth/register', {
       method: 'POST',
       headers: {
@@ -32,19 +42,19 @@ export function SignupForm() {
       body: JSON.stringify(user)
     });
 
-    // Vérifier la réponse
     if (response.ok) {
       const data = await response.json();
       localStorage.setItem('token', data.data.token);
       window.location.href = "/dashboard";
       localStorage.setItem('previousRoute', '/signup');
     } else {
-      console.error('Erreur lors de l\'inscription');
+      toast.error('Error when registering');
     }
   };
 
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input md:bg-white md:dark:bg-black">
+      <Toaster richColors position="top-center" />
       <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
         Welcome to Spotiflyx
       </h2>
@@ -69,7 +79,7 @@ export function SignupForm() {
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="password">Password</Label>
-          <Input id="password" placeholder="••••••••" type="password" />
+          <Input id="password" placeholder="••••••••" type="password" value={password} onChange={e => setPassword(e.target.value)} />
         </LabelInputContainer>
         <LabelInputContainer className="mb-8">
           <Label htmlFor="confirmpassword">Confirm password</Label>
@@ -77,6 +87,8 @@ export function SignupForm() {
             id="confirmpassword"
             placeholder="••••••••"
             type="password"
+            value={confirmPassword}
+            onChange={e => setConfirmPassword(e.target.value)}
           />
         </LabelInputContainer>
 

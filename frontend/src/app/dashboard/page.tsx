@@ -38,7 +38,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     const route = localStorage.getItem('previousRoute');
-    if (route === '/signup') {
+    if (route === '/register') {
       setPreviousRoute(route);
       localStorage.removeItem('previousRoute');
     }
@@ -47,7 +47,7 @@ export default function Dashboard() {
   return (
     <DefaultLayout currentPage="Dashboard">
       <h1 className="text-5xl ml-8">
-        {previousRoute === '/signup' ? 'Welcome' : 'Welcome back'}, {userFirstName}!
+        {previousRoute === '/register' ? 'Welcome' : 'Welcome back'}, {userFirstName}!
       </h1>
       <main className="mt-4 flex flex-wrap justify-evenly">
         <RecentVideos />

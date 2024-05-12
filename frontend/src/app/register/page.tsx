@@ -1,7 +1,7 @@
-import { SignupForm } from "@/components/SignupForm";
+import { RegisterForm } from "@/components/RegisterForm";
 import { Link } from 'next-view-transitions';;
 
-export default function Signup() {
+export default function Register() {
     return (
         <>
             <div
@@ -10,7 +10,7 @@ export default function Signup() {
                 <Link href="/"><h2>Spotiflyx</h2></Link>
             </div>
             <div className="h-dvh flex justify-center items-center">
-                <SignupForm />
+                <RegisterForm />
             </div>
         </>
     );

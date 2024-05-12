@@ -40,18 +40,18 @@ export default function IndexNavbar() {
                                     <span className="sr-only">Spotiflyx</span>
                                 </Link>
                                 <Link
-                                    href="#"
+                                    href="/login"
                                     className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                                 >
                                     <Home className="h-5 w-5" />
-                                    Dashboard
+                                    Log in
                                 </Link>
                                 <Link
-                                    href="#"
+                                    href="/register"
                                     className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                                 >
                                     <CircleUser className="h-5 w-5" />
-                                    Profile
+                                    Register
                                 </Link>
                             </nav>
                         </SheetContent>
@@ -59,7 +59,7 @@ export default function IndexNavbar() {
                 </div>
                 <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-4">
                     <Link href="/login"><button className="cursor-pointer py-3 px-7 border-2 rounded-full hover:-translate-y-1 transition-all duration-200 border-input bg-background hover:bg-accent hover:text-accent-foreground">Log in</button></Link>
-                    <Link href="/signup"><button className="cursor-pointer py-3 px-7 border-2 rounded-full hover:-translate-y-1 transition-all duration-200 bg-primary/90 text-primary-foreground hover:bg-primary/70">Sign up</button></Link>
+                    <Link href="/register"><button className="cursor-pointer py-3 px-7 border-2 rounded-full hover:-translate-y-1 transition-all duration-200 bg-primary/90 text-primary-foreground hover:bg-primary/70">Register</button></Link>
                 </div>
             </nav>
 

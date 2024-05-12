@@ -20,7 +20,7 @@ export default function Hero() {
               Your ultimate music and video streaming platform.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-              <Link href="/signup">
+              <Link href="/register">
                 <button className="animate-bounce cursor-pointer mb-3 py-3 px-7 border-2 rounded-full hover:-translate-y-1 transition border-input bg-background hover:bg-accent hover:text-accent-foreground">
                   Start streaming now
                 </button>

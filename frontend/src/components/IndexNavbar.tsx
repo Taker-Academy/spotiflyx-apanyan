@@ -33,7 +33,7 @@ export default function IndexNavbar() {
                         <SheetContent side="left" className="sm:max-w-xs">
                             <nav className="grid gap-6 text-lg font-medium">
                                 <Link
-                                    href="#"
+                                    href="/dashboard"
                                     className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
                                 >
                                     <Package2 className="h-5 w-5 transition-all group-hover:scale-110" />
@@ -57,7 +57,7 @@ export default function IndexNavbar() {
                         </SheetContent>
                     </Sheet>
                 </div>
-                <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-4">
+                <div className="hidden sm:flex sm:flex-1 sm:justify-end sm:gap-4">
                     <Link href="/login"><button className="cursor-pointer py-3 px-7 border-2 rounded-full hover:-translate-y-1 transition-all duration-200 border-input bg-background hover:bg-accent hover:text-accent-foreground">Log in</button></Link>
                     <Link href="/register"><button className="cursor-pointer py-3 px-7 border-2 rounded-full hover:-translate-y-1 transition-all duration-200 bg-primary/90 text-primary-foreground hover:bg-primary/70">Register</button></Link>
                 </div>

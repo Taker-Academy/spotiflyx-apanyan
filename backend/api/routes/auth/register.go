@@ -86,7 +86,7 @@ func sendConfirmationEmail(to string, name string) error {
 		},
 		Subject: "Confirmation de création de compte",
 		TextPart: "Bonjour, votre compte a été crée avec succes ",
-		HTMLPart: "<h3>Nous vous confirmons la création et l'activation de votre compte . Vous pouvez retrouver dès à présent le meilleur du divertissement sur <a href='http://localhost:4321/'>Spotiflyx</a>!</h3><br />A volonté et sans modération !",
+		HTMLPart: "<h3>Nous vous confirmons la création et l'activation de votre compte . Vous pouvez retrouver dès à présent le meilleur du divertissement sur <a href='http://localhost:3000/'>Spotiflyx</a>!</h3><br />A volonté et sans modération !",
 		CustomID: "AppGettingStartedTest",
 		},
 	}

@@ -82,7 +82,7 @@ func SendEditEmail(to string, name string) error {
 		},
 		Subject: "Modification de vos informations",
 		TextPart: "Bonjour, votreinformations ont été modifié avec succes",
-		HTMLPart: "<h3>Nous vous confirmons la suppression de votre compte, si vous n'etes pas l'origine de ces modification veuillez vous rapprocher de nos équipes le plus rapidement possible.<a href='http://localhost:4321/'>Spotiflyx</a>!</h3><br />A volonté et sans modération !",
+		HTMLPart: "<h3>Nous vous confirmons la suppression de votre compte, si vous n'etes pas l'origine de ces modification veuillez vous rapprocher de nos équipes le plus rapidement possible.<a href='http://localhost:3000/'>Spotiflyx</a>!</h3><br />A volonté et sans modération !",
 		CustomID: "AppGettingStartedTesttt",
 		},
 	}

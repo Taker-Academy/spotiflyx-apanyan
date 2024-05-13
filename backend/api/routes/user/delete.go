@@ -63,7 +63,7 @@ func SendSuppressionEmail(to string, name string) error {
 		},
 		Subject: "Confirmation de suppression de compte",
 		TextPart: "Bonjour, votre compte a été supprimé avec succes ",
-		HTMLPart: "<h3>Nous vous confirmons la suppression de votre compte .<a href='http://localhost:4321/'>Spotiflyx</a>!</h3><br />A volonté et sans modération !",
+		HTMLPart: "<h3>Nous vous confirmons la suppression de votre compte .<a href='http://localhost:3000/'>Spotiflyx</a>!</h3><br />A volonté et sans modération !",
 		CustomID: "AppGettingStartedTestt",
 		},
 	}

@@ -3,6 +3,10 @@ package user
 import (
 	"github.com/gofiber/fiber/v2"
 
+	"log"
+	"fmt"
+	"github.com/mailjet/mailjet-apiv3-go/v4"
+
 	"api/database"
 	"api/middleware"
 	"api/models"
@@ -43,6 +47,7 @@ func EditHandler(c *fiber.Ctx) error {
 			})
 		}
 		user.Password = hashedPassword
+		SendEditEmail(user.Email, user.FirstName)
 	}
 	if err := database.UpdateUser(user.ID, user); err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
@@ -59,4 +64,33 @@ func EditHandler(c *fiber.Ctx) error {
 		},
 	}
 	return c.JSON(response)
+}
+
+func SendEditEmail(to string, name string) error {
+	mailjetClient := mailjet.NewMailjetClient(os.Getenv("MAILJET_PUBLIC_KEY"), os.Getenv("MAILJET_PRIVATE_KEY"))
+	messagesInfo := []mailjet.InfoMessagesV31 {
+		{
+		From: &mailjet.RecipientV31{
+			Email: "alexandre.bacha@epitech.eu",
+			Name: "L'equipe Spotiflyx",
+		},
+		To: &mailjet.RecipientsV31{
+			mailjet.RecipientV31 {
+			Email: to,
+			Name: name,
+			},
+		},
+		Subject: "Modification de vos informations",
+		TextPart: "Bonjour, votreinformations ont été modifié avec succes",
+		HTMLPart: "<h3>Nous vous confirmons la suppression de votre compte, si vous n'etes pas l'origine de ces modification veuillez vous rapprocher de nos équipes le plus rapidement possible.<a href='http://localhost:4321/'>Spotiflyx</a>!</h3><br />A volonté et sans modération !",
+		CustomID: "AppGettingStartedTesttt",
+		},
+	}
+	messages := mailjet.MessagesV31{Info: messagesInfo}
+	res, err := mailjetClient.SendMailV31(&messages)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("Data: %+v\n", res)
+	return nil
 }

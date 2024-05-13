@@ -1,16 +1,6 @@
 import useSWR, { mutate } from 'swr';
 import useLocalStorage from '@/app/auth/useLocalStorage';
-import { Button } from "@/components/ui/button"
-
-type Media = {
-  id: number;
-  type: string;
-  date: string;
-  userId: number;
-  link: string;
-  title: string;
-  artiste: string;
-};
+import { Media } from '@/app/types';
 
 function convertToEmbedUrl(url: string): string {
   if (!url) {
@@ -54,7 +44,7 @@ export default function RecentMusics() {
           <div className='flex items-center gap-6'>
             <iframe
               className="rounded-sm"
-              src="https://open.spotify.com/embed/track/60a0Rd6pjrkxjPbaKzXjfq?utm_source=generator"
+              src={`https://open.spotify.com/embed/track/${media.mediaid}`}
               width="400"
               height="200"
               frameBorder="0"

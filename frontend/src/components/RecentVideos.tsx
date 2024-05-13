@@ -1,25 +1,6 @@
 import useSWR, { mutate } from 'swr';
 import useLocalStorage from '@/app/auth/useLocalStorage';
-import { Button } from "@/components/ui/button"
-
-type Media = {
-  id: number;
-  type: string;
-  date: string;
-  userId: number;
-  link: string;
-  title: string;
-  artiste: string;
-};
-
-function convertToEmbedUrl(url: string): string {
-  if (!url) {
-    return '';
-  }
-
-  const videoId = url.split('youtu.be/')[1]?.split('?')[0];
-  return `https://www.youtube.com/embed/${videoId}`;
-}
+import { Media } from '@/app/types';
 
 async function fetcher([url, token]: [string, string]) {
   const response = await fetch(url, {
@@ -33,6 +14,7 @@ async function fetcher([url, token]: [string, string]) {
   }
 
   const data = await response.json();
+  console.log(data.data)
 
   return data.data;
 }
@@ -55,7 +37,7 @@ export default function RecentVideos() {
             <iframe
               width="400"
               height="200"
-              src={media.link ? convertToEmbedUrl(media.link) : ''}
+              src={`https://www.youtube.com/embed/${media.mediaid}`}
               title="YouTube video player"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

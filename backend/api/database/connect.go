@@ -6,13 +6,18 @@ import (
     "log"
     "time"
     "api/models"
+    "os"
+    "fmt"
 )
 
 var db *gorm.DB
 
 func ConnectDB() {
     var err error
-    ***REMOVED***
+    user := os.Getenv("DB_USER")
+    dbname := os.Getenv("DB_NAME")
+    password := os.Getenv("DB_PASSWORD")
+    dataSourceName := fmt.Sprintf("host=db user=%s dbname=%s password=%s sslmode=disable", user, dbname, password)
     for {
         db, err = gorm.Open("postgres", dataSourceName)
         if err != nil {

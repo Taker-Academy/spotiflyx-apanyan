@@ -14,7 +14,6 @@ async function fetcher([url, token]: [string, string]) {
   }
 
   const data = await response.json();
-  console.log(data.data)
 
   return data.data;
 }

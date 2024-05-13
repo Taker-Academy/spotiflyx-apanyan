@@ -36,7 +36,6 @@ export default function UpdateProfile({ token }: { token: string }) {
   };
 
   const updateUser = async () => {
-    console.log('updateUser');
     const response = await fetch('http://127.0.0.1:8080/user/edit', {
       method: 'PUT',
       headers: {

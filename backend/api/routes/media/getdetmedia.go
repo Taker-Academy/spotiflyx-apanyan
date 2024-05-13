@@ -37,6 +37,7 @@ func GetMediaDetailsHandler(c *fiber.Ctx) error {
         "link":     media.Link,
         "title":    media.Title,
         "artiste":  media.Artiste,
+        "mediaid":  media.Mediaid,
     }
     return c.JSON(fiber.Map{
         "ok":   true,

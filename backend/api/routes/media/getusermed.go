@@ -28,6 +28,7 @@ func GetUserMediasHandler(c *fiber.Ctx) error {
             "link":     media.Link,
             "title":    media.Title,
             "artiste":  media.Artiste,
+            "mediaid":  media.Mediaid,
         }
         responseData = append(responseData, mediaData)
     }

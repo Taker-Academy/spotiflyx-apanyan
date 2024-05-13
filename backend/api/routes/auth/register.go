@@ -1,14 +1,16 @@
 package auth
 
 import (
-	"log"
+	"api/database"
+	"api/middleware"
+	"api/models"
 	"fmt"
+	"log"
+	"os"
 	"time"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/mailjet/mailjet-apiv3-go/v4"
-	"api/models"
-	"api/middleware"
-	"api/database"
 )
 
 func RegisterHandler(c *fiber.Ctx) error {

@@ -10,13 +10,23 @@ services:
   api:
     build:
       context: ./backend/api
+    environment:
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - MAILJET_PUBLIC_KEY=${MAILJET_PUBLIC_KEY}
+      - MAILJET_PRIVATE_KEY=${MAILJET_PRIVATE_KEY}
+      - YOUTUBE_API_KEY=${YOUTUBE_API_KEY}
+      - SPOTIFY_CLIENT_ID=${SPOTIFY_CLIENT_ID}
+      - SPOTIFY_CLIENT_SECRET=${SPOTIFY_CLIENT_SECRET}
     ports:
       - "8080:8080"
     depends_on:
       - db
 
   db:
-    build:
-      context: ./backend/db
+    image: postgres:alpine
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     ports:
       - "5432:5432"

@@ -1,17 +1,19 @@
 package media
 
 import (
-    "context"
-	"time"
-    "github.com/gofiber/fiber/v2"
-    "api/models"
-    "api/database"
+	"api/database"
 	"api/middleware"
-    "strings"
-    "google.golang.org/api/youtube/v3"
-    "google.golang.org/api/option"
-    "github.com/zmb3/spotify"
-    "golang.org/x/oauth2/clientcredentials"
+	"api/models"
+	"context"
+	"os"
+	"strings"
+	"time"
+
+	"github.com/gofiber/fiber/v2"
+	"github.com/zmb3/spotify"
+	"golang.org/x/oauth2/clientcredentials"
+	"google.golang.org/api/option"
+	"google.golang.org/api/youtube/v3"
 )
 
 func CreateMediaHandler(c *fiber.Ctx) error {

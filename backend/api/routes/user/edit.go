@@ -1,10 +1,13 @@
 package user
 
 import (
+	"os"
+
 	"github.com/gofiber/fiber/v2"
 
-	"log"
 	"fmt"
+	"log"
+
 	"github.com/mailjet/mailjet-apiv3-go/v4"
 
 	"api/database"

@@ -1,6 +1,7 @@
 import useSWR, { mutate } from 'swr';
 import useLocalStorage from '@/app/auth/useLocalStorage';
 import { Media } from '@/app/types';
+import { Link } from 'next-view-transitions';
 
 async function fetcher([url, token]: [string, string]) {
   const response = await fetch(url, {
@@ -27,25 +28,23 @@ export default function RecentVideos() {
 
   return (
     <section>
-      <h1 className="text-3xl text-center">Recent videos</h1>
-      {medias.filter((media: { type: string; }) => media.type === 'video').map((media: Media) => (
-        <div key={media.id}>
-          <h2>{media.title}</h2>
-          <p>{media.artiste}</p>
-          <div className='flex items-center gap-6'>
-            <iframe
-              width="400"
-              height="200"
-              src={`https://www.youtube.com/embed/${media.mediaid}`}
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            ></iframe>
+      <h1 className="text-3xl text-center mb-8">Recent videos</h1>
+      <main className='space-y-8'>
+        {medias.filter((media: { type: string; }) => media.type === 'video').map((media: Media) => (
+          <div key={media.id}>
+            <h2 className='text-2xl font-semibold mb-2 ml-4'>{media.title}</h2>
+            <div className='flex items-center gap-6 relative'>
+              <Link href={`/video/${media.id}`} className="absolute w-full h-full top-0 left-0 z-10"></Link>
+              <iframe
+                width="325"
+                height="180"
+                src={`https://www.youtube.com/embed/${media.mediaid}`}
+                title="YouTube video player"
+              ></iframe>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </main>
     </section>
   );
 }

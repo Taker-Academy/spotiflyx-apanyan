@@ -1,6 +1,7 @@
 import useSWR, { mutate } from 'swr';
 import useLocalStorage from '@/app/auth/useLocalStorage';
 import { Media } from '@/app/types';
+import { Link } from 'next-view-transitions';
 
 function convertToEmbedUrl(url: string): string {
   if (!url) {
@@ -36,21 +37,17 @@ export default function RecentMusics() {
 
   return (
     <section>
-      <h1 className="text-3xl text-center">Recent musics</h1>
+      <h1 className="text-3xl text-center mb-8">Recent musics</h1>
       {medias.filter((media: { type: string; }) => media.type === 'music').map((media: Media) => (
         <div key={media.id}>
-          <h2>{media.title}</h2>
-          <p>{media.artiste}</p>
-          <div className='flex items-center gap-6'>
+          <h2 className='text-2xl font-semibold mb-2 ml-4'>{media.title}</h2>
+          <div className='flex items-center gap-6 relative'>
+            <Link href={`/music/${media.id}`} className="absolute w-full h-full top-0 left-0 z-10"></Link>
             <iframe
-              className="rounded-sm"
               src={`https://open.spotify.com/embed/track/${media.mediaid}`}
-              width="400"
-              height="200"
-              frameBorder="0"
-              allowFullScreen={false}
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              loading="lazy">
+              width="325"
+              height="180"
+            >
             </iframe>
           </div>
         </div>

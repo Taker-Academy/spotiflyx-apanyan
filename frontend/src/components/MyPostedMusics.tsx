@@ -3,6 +3,7 @@ import useLocalStorage from '@/app/auth/useLocalStorage';
 import { Button } from "@/components/ui/button"
 import { Media } from '@/app/types';
 import DeleteMedia from '@/components/DeleteMedia';
+import { Link } from 'next-view-transitions';
 
 async function fetcher([url, token]: [string, string]) {
   const response = await fetch(url, {
@@ -34,7 +35,8 @@ export default function MyPostedMusics() {
         <div key={media.id}>
           <h2>{media.title}</h2>
           <p>{media.artiste}</p>
-          <div className='flex items-center gap-6'>
+          <div className='flex items-center gap-6 relative'>
+            <Link href={`/music/${media.id}`} className="absolute w-full h-full top-0 left-0 z-10"></Link>
             <iframe
               className="rounded-sm"
               src={`https://open.spotify.com/embed/track/${media.mediaid}`}

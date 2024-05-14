@@ -3,7 +3,7 @@ import useLocalStorage from '@/app/auth/useLocalStorage';
 import { Button } from "@/components/ui/button"
 import { Media } from '@/app/types';
 import DeleteMedia from '@/components/DeleteMedia';
-import { Link } from 'next-view-transitions';
+import { Link } from "next-view-transitions";
 
 async function fetcher([url, token]: [string, string]) {
   const response = await fetch(url, {

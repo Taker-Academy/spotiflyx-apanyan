@@ -1,5 +1,5 @@
 import { RegisterForm } from "@/components/RegisterForm";
-import { Link } from 'next-view-transitions';;
+import { Link } from "next-view-transitions";
 
 export default function Register() {
     return (

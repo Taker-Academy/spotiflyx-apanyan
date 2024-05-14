@@ -1,7 +1,7 @@
 import useSWR, { mutate } from 'swr';
 import useLocalStorage from '@/app/auth/useLocalStorage';
 import { Media } from '@/app/types';
-import { Link } from 'next-view-transitions';
+import { Link } from "next-view-transitions";
 
 function convertToEmbedUrl(url: string): string {
   if (!url) {

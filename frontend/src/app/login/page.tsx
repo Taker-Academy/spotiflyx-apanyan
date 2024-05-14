@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Link } from 'next-view-transitions';;
+import { Link } from "next-view-transitions";
 import { LoginForm } from "@/components/LoginForm";
 
 export default function Home() {

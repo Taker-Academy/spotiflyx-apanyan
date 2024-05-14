@@ -1,7 +1,7 @@
 "use client"
 import React from "react";
 import { Toaster, toast } from 'sonner'
-import { Link } from 'next-view-transitions';;
+import { Link } from "next-view-transitions";
 import { Label } from "@/components/ui/aceternity/label";
 import { Input } from "@/components/ui/aceternity/input";
 import { cn } from "@/lib/utils";

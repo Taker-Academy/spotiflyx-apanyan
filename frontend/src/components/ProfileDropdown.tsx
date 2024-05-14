@@ -1,5 +1,5 @@
 // Next.js imports
-import { Link } from 'next-view-transitions';
+import { Link } from "next-view-transitions";
 
 // Auth imports
 import logout from "@/app/auth/logout"

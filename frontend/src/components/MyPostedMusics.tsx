@@ -1,6 +1,5 @@
-import useSWR, { mutate } from 'swr';
+import useSWR from 'swr';
 import useLocalStorage from '@/app/auth/useLocalStorage';
-import { Button } from "@/components/ui/button"
 import { Media } from '@/app/types';
 import DeleteMedia from '@/components/DeleteMedia';
 import { Link } from "next-view-transitions";
@@ -26,26 +25,22 @@ export default function MyPostedMusics() {
   const { data: medias, error } = useSWR(['http://127.0.0.1:8080/media/me', token], fetcher);
 
   if (error) return <div>Error: {error.message}</div>;
-  if (!medias) return <h1 className="text-3xl">Recent musics</h1>;
+  if (!medias) return <h1 className="text-3xl">Posted musics</h1>;
 
   return (
     <section>
-      <h1 className="text-3xl text-center">Posted musics</h1>
+      <h1 className="text-3xl text-center mb-8">Posted musics</h1>
       {medias.filter((media: { type: string; }) => media.type === 'music').map((media: Media) => (
         <div key={media.id}>
-          <h2>{media.title}</h2>
-          <p>{media.artiste}</p>
+          <h2 className='text-2xl font-semibold mb-2 ml-4'>{media.title}</h2>
           <div className='flex items-center gap-6 relative'>
-            <Link href={`/music/${media.id}`} className="absolute w-full h-full top-0 left-0 z-10"></Link>
+            <Link href={`/music/${media.id}`} className="absolute w-[325px] h-[160px] top-0 left-0 z-10"></Link>
             <iframe
-              className="music-iframe"
+              className='music-iframe'
               src={`https://open.spotify.com/embed/track/${media.mediaid}`}
-              width="400"
-              height="200"
-              frameBorder="0"
-              allowFullScreen={false}
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              loading="lazy">
+              width="325"
+              height="180"
+            >
             </iframe>
             <DeleteMedia media={media} />
           </div>

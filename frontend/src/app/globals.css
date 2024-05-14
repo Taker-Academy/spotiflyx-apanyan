@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.video-iframe {
+  view-transition-name: video-iframe;
+}
+
+.music-iframe {
+  view-transition-name: music-iframe;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

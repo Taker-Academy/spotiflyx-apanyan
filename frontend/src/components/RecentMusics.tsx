@@ -44,6 +44,7 @@ export default function RecentMusics() {
           <div className='flex items-center gap-6 relative'>
             <Link href={`/music/${media.id}`} className="absolute w-full h-full top-0 left-0 z-10"></Link>
             <iframe
+              className='music-iframe'
               src={`https://open.spotify.com/embed/track/${media.mediaid}`}
               width="325"
               height="180"

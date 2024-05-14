@@ -36,6 +36,7 @@ export default function useMediaDetails({
         <h1 className="text-3xl mb-12">{media.title}</h1>
         <section className='flex justify-between'>
           <iframe
+            className='music-iframe'
             src={`https://open.spotify.com/embed/track/${data.data.mediaid}`}
             width="900"
             height="352"

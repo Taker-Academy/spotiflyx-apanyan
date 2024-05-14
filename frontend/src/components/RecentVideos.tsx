@@ -36,6 +36,7 @@ export default function RecentVideos() {
             <div className='flex items-center gap-6 relative'>
               <Link href={`/video/${media.id}`} className="absolute w-full h-full top-0 left-0 z-10"></Link>
               <iframe
+                className='video-iframe'
                 width="325"
                 height="180"
                 src={`https://www.youtube.com/embed/${media.mediaid}`}

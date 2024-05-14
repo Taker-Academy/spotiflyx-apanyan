@@ -36,6 +36,7 @@ export default function useMediaDetails({
         <h1 className="text-3xl mb-12">{media.title}</h1>
         <section className='flex justify-between'>
           <iframe
+            className='video-iframe'
             width="900"
             height="500"
             src={`https://www.youtube.com/embed/${media.mediaid}`}

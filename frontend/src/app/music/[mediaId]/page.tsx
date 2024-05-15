@@ -95,7 +95,7 @@ export default function MediaDetails({
           <div className='flex flex-col'>
             <iframe
               className={`music-iframe-${media.id}`}
-              style={{ viewTransitionName: `video-iframe-${media.id}-transition` }}
+              style={{ viewTransitionName: `music-iframe-${media.id}-transition` }}
               src={`https://open.spotify.com/embed/track/${data.data.mediaid}`}
               width="900"
               height="352"

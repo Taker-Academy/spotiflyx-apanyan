@@ -22,7 +22,7 @@ func ConnectDB() {
         db, err = gorm.Open("postgres", dataSourceName)
         if err != nil {
             log.Println("Failed to connect to the database:", err)
-            time.Sleep(5 * time.Second)
+            time.Sleep(1 * time.Second)
             continue
         }
         db.AutoMigrate(&models.User{}, &models.Media{}, &models.Favoris{}, &models.Likes{})

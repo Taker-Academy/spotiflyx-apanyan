@@ -17,7 +17,7 @@ func GetUserFavoriteMediasHandler(c *fiber.Ctx) error {
         Table("media").
         Joins("JOIN favoris ON media.id = favoris.media_id").
         Where("favoris.user_id = ?", userID).
-        Select("media.id, media.type, media.mediaid").
+        Select("media.title, media.id, media.type, media.mediaid").
         Find(&favoriteMedia).Error; err != nil {
         return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
             "ok":    false,
@@ -27,6 +27,7 @@ func GetUserFavoriteMediasHandler(c *fiber.Ctx) error {
     var responseData []map[string]interface{}
     for _, media := range favoriteMedia {
         mediaData := map[string]interface{}{
+            "title":    media.Title,
             "id":       media.ID,
             "type":     media.Type,
             "mediaid":  media.Mediaid,

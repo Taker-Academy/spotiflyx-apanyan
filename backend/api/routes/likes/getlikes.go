@@ -17,7 +17,7 @@ func GetUserLikesMediaHandler(c *fiber.Ctx) error {
         Table("media").
         Joins("JOIN likes ON media.id = likes.media_id").
         Where("likes.user_id = ?", userID).
-        Select("media.id, media.type, media.mediaid").
+        Select("media.title, media.id, media.type, media.mediaid").
         Find(&likedMedia).Error; err != nil {
         return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
             "ok":    false,
@@ -27,6 +27,7 @@ func GetUserLikesMediaHandler(c *fiber.Ctx) error {
     var responseData []map[string]interface{}
     for _, media := range likedMedia {
         mediaData := map[string]interface{}{
+            "title":    media.Title,
             "id":       media.ID,
             "type":     media.Type,
             "mediaid":  media.Mediaid,

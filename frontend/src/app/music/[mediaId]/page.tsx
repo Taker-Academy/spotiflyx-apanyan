@@ -34,7 +34,6 @@ export default function MediaDetails({
       },
     });
     const data = await response.json();
-    console.log(data);
   };
 
   const toggleLiked = async () => {
@@ -46,7 +45,6 @@ export default function MediaDetails({
       },
     });
     const data = await response.json();
-    console.log(data);
   };
 
   const { data, error } = useSWR(`http://127.0.0.1:8080/media/${params.mediaId}`, fetcher);

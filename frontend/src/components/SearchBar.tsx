@@ -34,7 +34,7 @@ const fetcher = async (url: string) => {
 export default function SearchBar() {
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState("")
-    
+
     var { data: media, error } = useSWR('http://localhost:8080/media', fetcher)
 
 
@@ -66,10 +66,9 @@ export default function SearchBar() {
                         <CommandEmpty>No media found.</CommandEmpty>
                         <CommandGroup>
                             {media.map((item: Media) => (
-                                <CommandList>
+                                <CommandList key={item.id}>
                                     <Link href={`/video/${item.id}`}>
                                         <CommandItem
-                                            key={item.id}
                                             value={String(item.id)}
                                             onSelect={(currentValue) => {
                                                 setValue(currentValue === value ? "" : currentValue)

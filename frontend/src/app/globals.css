@@ -2,14 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.video-iframe {
-  view-transition-name: video-iframe;
-}
-
-.music-iframe {
-  view-transition-name: music-iframe;
-}
-
 .spotiflyx-logo {
   view-transition-name: spotiflyx-logo;
 }

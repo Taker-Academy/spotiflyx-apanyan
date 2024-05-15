@@ -94,7 +94,8 @@ export default function MediaDetails({
         <section className='flex justify-between'>
           <div className='flex flex-col'>
             <iframe
-              className='video-iframe'
+              className={`video-iframe-${media.id}`}
+              style={{ viewTransitionName: `video-iframe-${media.id}-transition` }}
               width="900"
               height="500"
               src={`https://www.youtube.com/embed/${media.mediaid}`}

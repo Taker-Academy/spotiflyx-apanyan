@@ -65,17 +65,16 @@ export default function MediaDetails({
       <main className='ml-6'>
         <h1 className="text-3xl mb-12">{media.title}</h1>
         <section className='flex justify-between'>
-        <div className='flex flex-col'>
+          <div className='flex flex-col'>
             <iframe
-              className='video-iframe'
+              className='music-iframe'
+              src={`https://open.spotify.com/embed/track/${data.data.mediaid}`}
               width="900"
-              height="500"
-              src={`https://www.youtube.com/embed/${media.mediaid}`}
-              title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            ></iframe>
+              height="352"
+              allowFullScreen={false}
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy">
+            </iframe>
             <div className='mr-6 mt-6 flex justify-end gap-4'>
               <Heart isClick={liked} onClick={toggleLiked} />
               <StarButton starred={starred} onClick={toggleStarred} />

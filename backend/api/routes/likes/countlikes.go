@@ -1,13 +1,17 @@
 package likes
 
 import (
-    "github.com/gofiber/fiber/v2"
-    "api/models"
-    "api/database"
-    "strconv"
+	"api/database"
+	"api/middleware"
+	"api/models"
+	"strconv"
+
+	"github.com/gofiber/fiber/v2"
 )
 
 func GetMediaLikesHandler(c *fiber.Ctx) error {
+    claims := c.Locals("user").(*middleware.CustomClaims)
+    userID := claims.UserID
     postIDStr := c.Params("id")
 
     if postIDStr == "" {
@@ -32,9 +36,19 @@ func GetMediaLikesHandler(c *fiber.Ctx) error {
             "error": "Erreur interne du serveur lors de la récupération du nombre de likes",
         })
     }
+
+    var userLiked bool
+    var existingLike models.Likes
+    if err := db.Where("user_id = ? AND media_id = ?", userID, postID).First(&existingLike).Error; err == nil {
+        userLiked = true
+    } else {
+        userLiked = false
+    }
+
     return c.JSON(fiber.Map{
         "ok":        true,
         "postId":    postID,
         "likeCount": likeCount,
+        "userLiked": userLiked,
     })
 }

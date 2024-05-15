@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from 'react';
-import useSWR from 'swr';
+import useSWR, { mutate } from 'swr';
 import DefaultLayout from "@/components/DefaultLayout";
 import MediaPageSkeleton from '@/components/MediaPageSkeleton';
 import Heart from "react-animated-heart";
@@ -53,15 +53,23 @@ export default function MediaDetails({
   };
 
   const toggleLiked = async () => {
-    const method = liked ? 'DELETE' : 'POST';
-    setLiked((liked) => !liked);
+    const newLikedState = !liked;
+    const newLikeCount = newLikedState ? likeCount + 1 : likeCount - 1;
+
+    // Optimistically update UI state
+    setLiked(newLikedState);
+    setLikeCount(newLikeCount);
+
+    const method = newLikedState ? 'POST' : 'DELETE';
     const response = await fetch(`http://127.0.0.1:8080/likes/${params.mediaId}`, {
       method,
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
       },
     });
-    const data = await response.json();
+
+    // Revalidate with server state
+    mutate(`http://127.0.0.1:8080/likes/${params.mediaId}`);
   };
 
   const { data, error } = useSWR(`http://127.0.0.1:8080/media/${params.mediaId}`, fetcher);

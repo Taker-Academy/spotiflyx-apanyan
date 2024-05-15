@@ -1,7 +1,7 @@
 "use client"
 
-import { useState } from 'react';
-import useSWR from 'swr';
+import { useState, useEffect } from 'react';
+import useSWR, { mutate } from 'swr';
 import DefaultLayout from "@/components/DefaultLayout";
 import MediaPageSkeleton from '@/components/MediaPageSkeleton';
 import Heart from "react-animated-heart";
@@ -24,6 +24,22 @@ export default function MediaDetails({
 }) {
   const [starred, setStarred] = useState(false);
   const [liked, setLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(0);
+
+  useEffect(() => {
+    const fetchLikes = async () => {
+      const response = await fetch(`http://127.0.0.1:8080/likes/${params.mediaId}`, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+      const data = await response.json();
+      setLiked(data.userLiked);
+      setLikeCount(data.likeCount);
+    };
+
+    fetchLikes();
+  }, [params.mediaId]);
 
   const toggleStarred = async () => {
     setStarred((starred) => !starred);
@@ -37,14 +53,23 @@ export default function MediaDetails({
   };
 
   const toggleLiked = async () => {
-    setLiked((liked) => !liked);
+    const newLikedState = !liked;
+    const newLikeCount = newLikedState ? likeCount + 1 : likeCount - 1;
+
+    // Optimistically update UI state
+    setLiked(newLikedState);
+    setLikeCount(newLikeCount);
+
+    const method = newLikedState ? 'POST' : 'DELETE';
     const response = await fetch(`http://127.0.0.1:8080/likes/${params.mediaId}`, {
-      method: 'POST',
+      method,
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
       },
     });
-    const data = await response.json();
+
+    // Revalidate with server state
+    mutate(`http://127.0.0.1:8080/likes/${params.mediaId}`);
   };
 
   const { data, error } = useSWR(`http://127.0.0.1:8080/media/${params.mediaId}`, fetcher);
@@ -73,7 +98,8 @@ export default function MediaDetails({
               allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
               loading="lazy">
             </iframe>
-            <div className='mr-6 mt-6 flex justify-end gap-4'>
+            <div className='mr-6 mt-6 flex justify-end items-center'>
+              <p className='mr-[-20px]'>{likeCount}</p>
               <Heart isClick={liked} onClick={toggleLiked} />
               <StarButton starred={starred} onClick={toggleStarred} />
             </div>

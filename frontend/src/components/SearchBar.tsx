@@ -45,6 +45,48 @@ export default function SearchBar() {
     media = media.data
 
     return (
-        <p>Search</p>
+        <div className="relative ml-auto flex-1 md:grow-0">
+            <Popover open={open} onOpenChange={setOpen}>
+                <PopoverTrigger asChild>
+                    <Button
+                        variant="outline"
+                        role="combobox"
+                        aria-expanded={open}
+                        className="justify-between w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[336px]"
+                    >
+                        {value
+                            ? media.find((item: Media) => String(item.id) === value)?.title
+                            : "Search media..."}
+                        <Search className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                    </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-[200px] p-0">
+                    <Command>
+                        <CommandInput placeholder="Search media..." />
+                        <CommandEmpty>No media found.</CommandEmpty>
+                        <CommandGroup>
+                            {media ? media.map((item: Media) => (
+                                <CommandList key={item.id}>
+                                    <Link href={`/video/${item.id}`}>
+                                        <CommandItem
+                                            value={String(item.id)}
+                                            onSelect={(currentValue) => {
+                                                setValue(currentValue === value ? "" : currentValue)
+                                                setOpen(false)
+                                            }}
+                                        >
+                                            <div className="w-full flex justify-between">
+                                                <p>{item.title}</p>
+                                                <p className="opacity-25">{item.type}</p>
+                                            </div>
+                                        </CommandItem>
+                                    </Link>
+                                </CommandList>
+                            )) : null}
+                        </CommandGroup>
+                    </Command>
+                </PopoverContent>
+            </Popover>
+        </div>
     )
 }

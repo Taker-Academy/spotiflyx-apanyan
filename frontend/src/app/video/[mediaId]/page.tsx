@@ -53,9 +53,10 @@ export default function MediaDetails({
   };
 
   const toggleLiked = async () => {
+    const method = liked ? 'DELETE' : 'POST';
     setLiked((liked) => !liked);
     const response = await fetch(`http://127.0.0.1:8080/likes/${params.mediaId}`, {
-      method: 'POST',
+      method,
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
       },

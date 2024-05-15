@@ -20,8 +20,8 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import AddMedia from "@/components/AddMedia"
 import SideNavbar from './SideNavbar';
 import ProfileDropdown from './ProfileDropdown';
-import SearchBar from './SearchBar';
-import PhoneNavMenu from './PhoneNavMenu';
+import SearchBar from '@/components/SearchBar';
+import PhoneNavMenu from '@/components/PhoneNavMenu';
 
 export default function DefaultLayout({ children, currentPage }: { children: ReactNode, currentPage: string }) {
     const [token] = useLocalStorage('token', null);

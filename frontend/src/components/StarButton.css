@@ -9,7 +9,7 @@
 
 .StarButton .StarAnimation {
   position: absolute;
-  top: 0px;
+  top: -32px;
   left: -32px;
   pointer-events: none;
 }

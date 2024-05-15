@@ -27,29 +27,33 @@ export default function MediaDetails({
   const [likeCount, setLikeCount] = useState(0);
 
   useEffect(() => {
-    const fetchLikes = async () => {
-      const response = await fetch(`http://127.0.0.1:8080/likes/${params.mediaId}`, {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
-        },
-      });
-      const data = await response.json();
-      setLiked(data.userLiked);
-      setLikeCount(data.likeCount);
+    const fetchLikesAndFavoriteStatus = async () => {
+      const likesResponse = await fetcher(`http://127.0.0.1:8080/likes/${params.mediaId}`);
+      setLiked(likesResponse.userLiked);
+      setLikeCount(likesResponse.likeCount);
+
+      const favoriteStatusResponse = await fetcher(`http://127.0.0.1:8080/favoris/${params.mediaId}`);
+      setStarred(favoriteStatusResponse.isFaved);
     };
 
-    fetchLikes();
+    fetchLikesAndFavoriteStatus();
   }, [params.mediaId]);
 
   const toggleStarred = async () => {
-    setStarred((starred) => !starred);
-    const response = await fetch(`http://127.0.0.1:8080/favoris/${params.mediaId}`, {
-      method: 'POST',
+    const newStarredState = !starred;
+    // Optimistically update UI state
+    setStarred(newStarredState);
+
+    const method = newStarredState ? 'POST' : 'DELETE';
+    await fetch(`http://127.0.0.1:8080/favoris/${params.mediaId}`, {
+      method,
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
       },
     });
-    const data = await response.json();
+
+    // Revalidate with server state
+    mutate(`http://127.0.0.1:8080/favoris/${params.mediaId}`);
   };
 
   const toggleLiked = async () => {
@@ -61,7 +65,7 @@ export default function MediaDetails({
     setLikeCount(newLikeCount);
 
     const method = newLikedState ? 'POST' : 'DELETE';
-    const response = await fetch(`http://127.0.0.1:8080/likes/${params.mediaId}`, {
+    await fetch(`http://127.0.0.1:8080/likes/${params.mediaId}`, {
       method,
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`,

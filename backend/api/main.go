@@ -32,6 +32,7 @@ func setupRoutes(app *fiber.App) {
     app.Delete("/likes/:id", middleware.Authenticate, likes.UnlikeMediaHandler)
     app.Post("/favoris/:id", middleware.Authenticate, favoris.AddToFavoriteHandler)
     app.Get("/favoris/me", middleware.Authenticate, favoris.GetUserFavoriteMediasHandler)
+    app.Get("/favoris/:id", middleware.Authenticate, favoris.IsPostFavedHandler)
     app.Delete("/favoris/:id", middleware.Authenticate, favoris.RemoveFromFavoritesHandler)
 }
 

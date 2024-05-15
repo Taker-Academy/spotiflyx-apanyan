@@ -8,7 +8,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func GetUserFavoriteMediaHandler(c *fiber.Ctx) error {
+func GetUserFavoriteMediasHandler(c *fiber.Ctx) error {
     claims := c.Locals("user").(*middleware.CustomClaims)
     userID := claims.UserID
     db := database.GetDB()

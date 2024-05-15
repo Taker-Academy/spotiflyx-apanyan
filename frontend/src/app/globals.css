@@ -10,6 +10,10 @@
   view-transition-name: music-iframe;
 }
 
+.spotiflyx-logo {
+  view-transition-name: spotiflyx-logo;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

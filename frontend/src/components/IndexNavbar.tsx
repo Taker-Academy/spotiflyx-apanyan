@@ -14,7 +14,7 @@ export default function IndexNavbar() {
                     <Link href="/dashboard" className="-m-1.5 p-1.5 hover:scale-105 transition">
                         <span className="sr-only">Your Company</span>
                         <Image
-                            className="h-12 w-auto"
+                            className="spotiflyx-logo h-12 w-auto"
                             src="/icon.png"
                             alt=""
                             width="100"

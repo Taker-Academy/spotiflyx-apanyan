@@ -30,7 +30,7 @@ export default function RecentVideos() {
     <section>
       <h1 className="text-3xl text-center mb-8">Recent videos</h1>
       <main className='space-y-8'>
-        {medias.filter((media: { type: string; }) => media.type === 'video').map((media: Media) => (
+        {medias.filter((media: { type: string; }) => media.type === 'video').slice(0, 3).map((media: Media) => (
           <div key={media.id}>
             <h2 className='text-2xl font-semibold mb-2 ml-4'>{media.title}</h2>
             <div className='flex items-center gap-6 relative'>

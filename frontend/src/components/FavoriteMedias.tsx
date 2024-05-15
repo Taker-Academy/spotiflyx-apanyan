@@ -27,7 +27,7 @@ export default function FavoriteMedias() {
   if (!medias) return <h1 className="text-3xl">Favorite medias</h1>;
 
   return (
-    <main className="mt-4 flex flex-wrap justify-evenly">
+    <main className="mt-4 flex flex-wrap gap-8 justify-evenly">
       <section className='mx-8'>
         <h1 className="text-3xl text-center mb-8">Favorite videos</h1>
         <main className='space-y-8'>

@@ -35,6 +35,7 @@ export default function Dashboard() {
   });
 
   const userFirstName = userData?.data.firstName;
+  console.log(userData);
 
   useEffect(() => {
     const route = localStorage.getItem('previousRoute');

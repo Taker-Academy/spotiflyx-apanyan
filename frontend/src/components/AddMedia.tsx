@@ -23,7 +23,7 @@ export default function AddMedia() {
   const [token] = useLocalStorage('token', null); // get the token from local storage
 
   const addMedia = async () => {
-    const response = await fetch('http://localhost:8080/media', {
+    const response = await fetch('http://spotiflyx.xyz:8080/media', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,

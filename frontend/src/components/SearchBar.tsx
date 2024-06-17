@@ -35,7 +35,7 @@ export default function SearchBar() {
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState("")
 
-    var { data: media, error } = useSWR('http://spotiflyx.xyz:8080/media', fetcher)
+    var { data: media, error } = useSWR('http://spotiflyx.xyz:8443/media', fetcher)
 
 
     if (error) return <div>Failed to load</div>

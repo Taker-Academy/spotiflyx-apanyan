@@ -42,5 +42,5 @@ func main() {
     app.Use(cors.New())
     setupRoutes(app)
 
-    log.Fatal(app.Listen(":8080"))
+    log.Fatal(app.Listen(":8443"))
 }

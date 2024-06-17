@@ -36,7 +36,7 @@ export default function UpdateProfile({ token }: { token: string }) {
   };
 
   const updateUser = async () => {
-    const response = await fetch('http://spotiflyx.xyz:8080/user/edit', {
+    const response = await fetch('http://spotiflyx.xyz:8443/user/edit', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ export default function UpdateProfile({ token }: { token: string }) {
     const data = await response.json();
 
     // Update the local data immediately, but disable revalidation
-    mutate('http://spotiflyx.xyz:8080/user/edit', data, false);
+    mutate('http://spotiflyx.xyz:8443/user/edit', data, false);
   };
 
   const handleUpdate = async (event: any) => {

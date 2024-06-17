@@ -28,11 +28,11 @@ export default function MediaDetails({
 
   useEffect(() => {
     const fetchLikesAndFavoriteStatus = async () => {
-      const likesResponse = await fetcher(`http://spotiflyx.xyz:8080/likes/${params.mediaId}`);
+      const likesResponse = await fetcher(`http://spotiflyx.xyz:8443/likes/${params.mediaId}`);
       setLiked(likesResponse.userLiked);
       setLikeCount(likesResponse.likeCount);
 
-      const favoriteStatusResponse = await fetcher(`http://spotiflyx.xyz:8080/favoris/${params.mediaId}`);
+      const favoriteStatusResponse = await fetcher(`http://spotiflyx.xyz:8443/favoris/${params.mediaId}`);
       setStarred(favoriteStatusResponse.isFaved);
     };
 
@@ -45,7 +45,7 @@ export default function MediaDetails({
     setStarred(newStarredState);
 
     const method = newStarredState ? 'POST' : 'DELETE';
-    await fetch(`http://spotiflyx.xyz:8080/favoris/${params.mediaId}`, {
+    await fetch(`http://spotiflyx.xyz:8443/favoris/${params.mediaId}`, {
       method,
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -53,7 +53,7 @@ export default function MediaDetails({
     });
 
     // Revalidate with server state
-    mutate(`http://spotiflyx.xyz:8080/favoris/${params.mediaId}`);
+    mutate(`http://spotiflyx.xyz:8443/favoris/${params.mediaId}`);
   };
 
   const toggleLiked = async () => {
@@ -65,7 +65,7 @@ export default function MediaDetails({
     setLikeCount(newLikeCount);
 
     const method = newLikedState ? 'POST' : 'DELETE';
-    await fetch(`http://spotiflyx.xyz:8080/likes/${params.mediaId}`, {
+    await fetch(`http://spotiflyx.xyz:8443/likes/${params.mediaId}`, {
       method,
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -73,10 +73,10 @@ export default function MediaDetails({
     });
 
     // Revalidate with server state
-    mutate(`http://spotiflyx.xyz:8080/likes/${params.mediaId}`);
+    mutate(`http://spotiflyx.xyz:8443/likes/${params.mediaId}`);
   };
 
-  const { data, error } = useSWR(`http://spotiflyx.xyz:8080/media/${params.mediaId}`, fetcher);
+  const { data, error } = useSWR(`http://spotiflyx.xyz:8443/media/${params.mediaId}`, fetcher);
 
   if (error) return <DefaultLayout currentPage='video page'>Failed to load media details</DefaultLayout>
   if (!data) return <DefaultLayout currentPage='video page'><MediaPageSkeleton /></DefaultLayout>

@@ -34,7 +34,7 @@ export function RegisterForm() {
       password
     };
 
-    const response = await fetch('http://spotiflyx.xyz:8080/auth/register', {
+    const response = await fetch('http://spotiflyx.xyz:8443/auth/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

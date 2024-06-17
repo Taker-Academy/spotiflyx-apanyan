@@ -11,5 +11,5 @@ docker build -t spotiflyx-frontend .
 2. Run the Docker image:
 
 ```bash
-docker run -p 3000:3000 spotiflyx-frontend
+docker run -p 2096:2096 spotiflyx-frontend
 ```

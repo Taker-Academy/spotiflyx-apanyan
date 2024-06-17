@@ -21,7 +21,7 @@ export default function DeleteAccount({ token }: { token: string }) {
         setIsLoading(true);
 
         try {
-            const response = await fetch('http://127.0.0.1:8080/user/remove', {
+            const response = await fetch('http://spotiflyx.xyz:8080/user/remove', {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`

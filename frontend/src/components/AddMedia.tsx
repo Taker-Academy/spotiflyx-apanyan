@@ -39,7 +39,7 @@ export default function AddMedia() {
     const data = await response.json();
 
     if (data.ok) {
-      mutate(['http://127.0.0.1:8080/media', token]);
+      mutate(['http://spotiflyx.xyz:8080/media', token]);
     } else {
       console.error('An error occurred while creating the media:', data.error);
     }

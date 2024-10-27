@@ -20,7 +20,7 @@ export function LoginForm() {
     };
 
     // Send the POST request to the backend
-    const response = await fetch('http://spotiflyx.xyz:8443/auth/login', {
+    const response = await fetch('https://api.spotiflyx.xyz/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

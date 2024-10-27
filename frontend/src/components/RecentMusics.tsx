@@ -30,7 +30,7 @@ async function fetcher([url, token]: [string, string]) {
 
 export default function RecentMusics() {
   const [token] = useLocalStorage('token', null);
-  const { data: medias, error } = useSWR(['http://spotiflyx.xyz:8443/media', token], fetcher);
+  const { data: medias, error } = useSWR(['https://api.spotiflyx.xyz/media', token], fetcher);
 
   if (error) return <div>Error: {error.message}</div>;
   if (!medias) return <h1 className="text-3xl">Recent musics</h1>;

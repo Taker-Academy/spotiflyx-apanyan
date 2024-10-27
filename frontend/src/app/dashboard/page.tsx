@@ -20,7 +20,7 @@ export default function Dashboard() {
   useCheckAuth(token); // call checkAuth after the token has been retrieved
   const [previousRoute, setPreviousRoute] = useState<string | null>(null);
 
-  const { data: userData, error } = useSWR('http://spotiflyx.xyz:8443/user/me', async url => {
+  const { data: userData, error } = useSWR('https://api.spotiflyx.xyz/user/me', async url => {
     const response = await fetch(url, {
       headers: {
         'Authorization': `Bearer ${token}`

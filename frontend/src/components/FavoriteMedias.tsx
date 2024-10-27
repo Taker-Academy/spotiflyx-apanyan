@@ -21,7 +21,7 @@ async function fetcher([url, token]: [string, string]) {
 
 export default function FavoriteMedias() {
   const [token] = useLocalStorage('token', null);
-  const { data: medias, error } = useSWR(['http://spotiflyx.xyz:8443/favoris/me', token], fetcher);
+  const { data: medias, error } = useSWR(['https://api.spotiflyx.xyz/favoris/me', token], fetcher);
 
   if (error) return <div>Error: {error.message}</div>;
   if (!medias) return <h1 className="text-3xl">Favorite medias</h1>;

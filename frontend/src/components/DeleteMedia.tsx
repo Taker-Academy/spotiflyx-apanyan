@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 const DeleteMedia: React.FC<{ media: Media }> = ({ media }) => {
     async function deleteMedia(id: number) {
         const token = localStorage.getItem('token');
-        const response = await fetch(`http://spotiflyx.xyz:8443/media/${id}`, {
+        const response = await fetch(`https://api.spotiflyx.xyz/media/${id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -23,7 +23,7 @@ const DeleteMedia: React.FC<{ media: Media }> = ({ media }) => {
         }
 
         // Revalidate the data after a media is deleted
-        mutate(['http://spotiflyx.xyz:8443/media/me', token]);
+        mutate(['https://api.spotiflyx.xyz/media/me', token]);
     }
 
     return (

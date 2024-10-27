@@ -23,7 +23,7 @@ export default function AddMedia() {
   const [token] = useLocalStorage('token', null); // get the token from local storage
 
   const addMedia = async () => {
-    const response = await fetch('http://spotiflyx.xyz:8443/media', {
+    const response = await fetch('https://api.spotiflyx.xyz/media', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -39,7 +39,7 @@ export default function AddMedia() {
     const data = await response.json();
 
     if (data.ok) {
-      mutate(['http://spotiflyx.xyz:8443/media', token]);
+      mutate(['https://api.spotiflyx.xyz/media', token]);
     } else {
       console.error('An error occurred while creating the media:', data.error);
     }
